@@ -7,10 +7,6 @@ import { Router } from 'next/router'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-
-
-
-
 // ** Loader Import
 import NProgress from 'nprogress'
 
@@ -22,6 +18,7 @@ import type { EmotionCache } from '@emotion/cache'
 
 import { defaultACLObj } from 'src/configs/acl'
 import themeConfig from 'src/configs/themeConfig'
+import 'src/configs/i18n'
 
 // ** Fake-DB Import
 import 'src/@fake-db'
@@ -154,7 +151,6 @@ const App = (props: ExtendedAppProps) => {
           </SettingsProvider>
         </AuthProvider>
       </CacheProvider>
-   
   )
 }
 

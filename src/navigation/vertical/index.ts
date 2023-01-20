@@ -6,6 +6,8 @@ const navigation = (): VerticalNavItemsType => {
     {
       title: 'Home',
       path: '/home',
+      action: 'read',
+      subject: 'acl-page',
       icon: 'mdi:home-outline',
     },
     {
@@ -14,10 +16,38 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'mdi:email-outline',
     },
     {
-      path: '/acl',
+      title: 'Github',
+      path: '/github',
       action: 'read',
       subject: 'acl-page',
-      title: 'Access Control',
+      icon: 'mdi:shield-outline',
+    },
+    {
+      title: 'Documentation',
+      path: '/documentation',
+      action: 'read',
+      subject: 'acl-page',
+      icon: 'mdi:shield-outline',
+    },
+    {
+      title: 'API',
+      path: '/api',
+      action: 'read',
+      subject: 'acl-page',
+      icon: 'mdi:shield-outline',
+    },
+    {
+      title: 'Data Flow Diagram',
+      path: '/dfd',
+      action: 'read',
+      subject: 'acl-page',
+      icon: 'mdi:shield-outline',
+    },
+    {
+      title: 'About',
+      path: '/about',
+      action: 'read',
+      subject: 'acl-page',
       icon: 'mdi:shield-outline',
     }
   ]

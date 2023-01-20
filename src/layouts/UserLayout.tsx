@@ -84,7 +84,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
             // navItems: horizontalMenuItems
           },
           appBar: {
-            content: () => <HorizontalAppBarContent settings={settings} saveSettings={saveSettings} />
+            content: () => <HorizontalAppBarContent hidden={true} settings={settings} saveSettings={saveSettings} />
           }
         }
       })}
