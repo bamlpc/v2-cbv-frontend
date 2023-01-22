@@ -5,7 +5,7 @@ import { GetStaticProps, GetStaticPaths, GetStaticPropsContext, InferGetStaticPr
 import axios from 'axios'
 
 // ** Demo Components Imports
-import UserProfile from 'src/views/pages/user-profile/UserProfile'
+import UserProfile from 'src/views/pages/issue/UserProfile'
 
 // ** Types
 import { UserProfileActiveTab } from 'src/@fake-db/types'

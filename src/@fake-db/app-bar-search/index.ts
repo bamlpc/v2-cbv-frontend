@@ -133,28 +133,28 @@ const searchData: AppBarSearchType[] = [
   },
   {
     id: 19,
-    url: '/pages/user-profile/profile',
+    url: '/issue/profile',
     icon: 'mdi:card-account-details-outline',
     title: 'User Profile',
     category: 'appsPages'
   },
   {
     id: 20,
-    url: '/pages/user-profile/teams',
+    url: '/issue/teams',
     icon: 'mdi:account-group',
     title: 'User Profile - Teams',
     category: 'appsPages'
   },
   {
     id: 21,
-    url: '/pages/user-profile/projects',
+    url: '/issue/projects',
     icon: 'mdi:view-grid-outline',
     title: 'User Profile - Projects',
     category: 'appsPages'
   },
   {
     id: 22,
-    url: '/pages/user-profile/connections',
+    url: '/issue/connections',
     icon: 'mdi:link-variant',
     title: 'User Profile - Connections',
     category: 'appsPages'

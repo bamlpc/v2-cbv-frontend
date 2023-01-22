@@ -29,11 +29,11 @@ import {
 import Icon from 'src/@core/components/icon'
 
 // ** Demo Components
-import Teams from 'src/views/pages/user-profile/teams'
-import Profile from 'src/views/pages/user-profile/profile'
-import Projects from 'src/views/pages/user-profile/projects'
-import Connections from 'src/views/pages/user-profile/connections'
-import UserProfileHeader from 'src/views/pages/user-profile/UserProfileHeader'
+import Teams from 'src/views/pages/issue/teams'
+import Profile from 'src/views/pages/issue/profile'
+import Projects from 'src/views/pages/issue/projects'
+import Connections from 'src/views/pages/issue/connections'
+import UserProfileHeader from 'src/views/pages/issue/UserProfileHeader'
 
 const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
   '& .MuiTabs-indicator': {
@@ -67,7 +67,7 @@ const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab })
     setActiveTab(value)
     router
       .push({
-        pathname: `/pages/user-profile/${value.toLowerCase()}`
+        pathname: `/issue/${value.toLowerCase()}`
       })
       .then(() => setIsLoading(false))
   }

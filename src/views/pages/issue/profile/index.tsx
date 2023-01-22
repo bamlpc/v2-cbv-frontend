@@ -2,10 +2,10 @@
 import Grid from '@mui/material/Grid'
 
 // ** Demo Components
-import AboutOverivew from 'src/views/pages/user-profile/profile/AboutOverivew'
-import ProjectsTable from 'src/views/pages/user-profile/profile/ProjectsTable'
-import ActivityTimeline from 'src/views/pages/user-profile/profile/ActivityTimeline'
-import ConnectionsTeams from 'src/views/pages/user-profile/profile/ConnectionsTeams'
+import AboutOverivew from 'src/views/pages/issue/profile/AboutOverivew'
+import ProjectsTable from 'src/views/pages/issue/profile/ProjectsTable'
+import ActivityTimeline from 'src/views/pages/issue/profile/ActivityTimeline'
+import ConnectionsTeams from 'src/views/pages/issue/profile/ConnectionsTeams'
 
 // ** Types
 import { ProfileTabType } from 'src/@fake-db/types'

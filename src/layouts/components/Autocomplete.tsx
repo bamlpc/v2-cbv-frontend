@@ -283,7 +283,7 @@ const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
         <ListItem sx={{ py: 2 }} disablePadding onClick={() => setOpenDialog(false)}>
           <Box
             component={Link}
-            href='/pages/user-profile/profile'
+            href='/issue/profile'
             sx={{
               display: 'flex',
               alignItems: 'center',
