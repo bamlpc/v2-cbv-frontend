@@ -26,7 +26,7 @@ const TopContributorAward = () => {
           <Box component='span' sx={{ fontWeight: 'bold' }}>
             @BMogetta
           </Box>
-          ! 🎉
+          🎉
         </Typography>
         <Typography variant='body2' sx={{ mb: 3.25 }}>
           Top contributor of the month

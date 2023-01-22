@@ -22,8 +22,7 @@ import CardStatisticsVertical from 'src/@core/components/card-statistics/card-st
 
 // ** Demo Components Imports
 import TopContributorAward from 'src/views/dashboards/crm/TopContributorAward'
-import CrmTotalGrowth from 'src/views/dashboards/crm/CrmTotalGrowth'
-import CrmTotalProfit from 'src/views/dashboards/crm/CrmTotalProfit'
+import TotalGrowth from 'src/views/dashboards/crm/SmallPieChart'
 import CrmMonthlyBudget from 'src/views/dashboards/crm/CrmMonthlyBudget'
 import CrmWeeklyOverview from 'src/views/dashboards/crm/CrmWeeklyOverview'
 import CrmOrganicSessions from 'src/views/dashboards/crm/CrmOrganicSessions'
@@ -44,7 +43,7 @@ const Home = () => {
               trendNumber='+20'
               title='Total'
               chipText='Last Month'
-              icon={<Icon icon='mdi:cart-plus' />}
+              icon={<Icon icon='mdi:cart-plus' />} // TODO: revisar icono para mostrar
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
@@ -54,14 +53,24 @@ const Home = () => {
               trendNumber='+4'
               title='Bitcoin'
               chipText='Last Month'
-              icon={<Icon icon='mdi:currency-usd' />}
+              icon={<Icon icon='mdi:currency-usd' />} // TODO: revisar icono para mostrar
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
-            <CrmTotalProfit />
+            <TotalGrowth // TODO: revisar colores
+              title={'Total New CBV'}
+              subtitle={'by blockchain'}
+              data={[30, 10, 10, 15]} // TODO: needs to load dinamically
+              labels={['Bitcoin', 'Ethereum', 'Phantama', 'Solana']} // TODO: needs to load dinamically
+            />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
-            <CrmTotalGrowth />
+            <TotalGrowth // TODO: revisar colores
+              title={'Total New CBV'}
+              subtitle={'by severity'}
+              data={[10, 20, 30, 5]} // TODO: needs to load dinamically
+              labels={['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']} // TODO: needs to load dinamically
+            />
           </Grid>
           <Grid item xs={12} md={4}>
             <TopContributorAward />
