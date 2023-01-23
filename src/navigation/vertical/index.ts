@@ -9,34 +9,36 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'mdi:home-outline'
     },
     {
-      title: 'Second Page',
-      path: '/second-page',
-      icon: 'mdi:email-outline'
+      title: 'CBV',
+      path: '/issue/profile',
+      icon: 'mdi:file-document-outline'
     },
     {
       title: 'Github',
       path: '/github',
-      icon: 'mdi:shield-outline'
+      icon: 'mdi:github'
     },
     {
       title: 'Documentation',
       path: '/documentation',
-      icon: 'mdi:shield-outline'
+      icon: 'mdi:book-open-blank-variant'
     },
     {
       title: 'API',
-      path: '/api',
-      icon: 'mdi:shield-outline'
+      path: 'https://cbv-api.deno.dev/',
+      externalLink: true,
+      openInNewTab: true,
+      icon: 'mdi:application-export'
     },
     {
       title: 'Data Flow Diagram',
       path: '/dfd',
-      icon: 'mdi:shield-outline'
+      icon: 'mdi:sitemap-outline'
     },
     {
       title: 'About',
       path: '/about',
-      icon: 'mdi:shield-outline'
+      icon: 'mdi:information-outline'
     }
   ]
 }
