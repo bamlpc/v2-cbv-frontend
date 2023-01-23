@@ -139,6 +139,25 @@ const columns: GridColumns = [
         />
       )
     }
+  },
+  {
+    flex: 0.2,
+    minWidth: 80,
+    field: 'credits',
+    headerName: 'Credits',
+    renderCell: (params: GridRenderCellParams) => {
+      const status = statusObj[params.row.status]
+
+      return (
+        <CustomChip
+          size='small'
+          skin='light'
+          color={status.color}
+          label={status.title}
+          sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
+        />
+      )
+    }
   }
 ]
 
@@ -189,6 +208,26 @@ const TableColumns = () => {
       />
     </Card>
   )
+}
+
+function getTestData() {
+  const arr = []
+  const _blockchain = ['Bitcoin', 'Ethereum', 'Polygon', 'Phantasma']
+  const _credits = ['@lukeciatt', '@BMogetta', 'Luciano Ciattaglia', 'Bruno Mogetta']
+  const _date = ['01 JAN 23', '02 JAN 23', '03 JAN 23', '04 JAN 23']
+
+  for (let i = 10; i < 61; i++) {
+    arr.push({
+      cbv: {
+        title: `Title entry number ${i}`,
+        cbv_id: `CBV-23-0000${i}`,
+        blockchain: _blockchain[Math.floor(Math.random() * _blockchain.length)],
+        severity: (Math.random() * 10).toFixed(1),
+        updated_at: _date[Math.floor(Math.random() * _date.length)],
+        credits: _credits[Math.floor(Math.random() * _credits.length)]
+      }
+    })
+  }
 }
 
 export default TableColumns
