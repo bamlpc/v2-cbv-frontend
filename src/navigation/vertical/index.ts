@@ -9,14 +9,14 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'mdi:home-outline'
     },
     {
-      title: 'CBV',
-      path: '/issue/profile',
+      title: 'Vulnerabilities List',
+      path: '/list',
       icon: 'mdi:file-document-outline'
     },
     {
-      title: 'Github',
-      path: '/github',
-      icon: 'mdi:github'
+      title: 'Attack Techniques',
+      path: '/attacktechniques',
+      icon: 'mdi:file-document-alert-outline'
     },
     {
       title: 'Documentation',
@@ -24,21 +24,16 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'mdi:book-open-blank-variant'
     },
     {
+      title: 'Github',
+      path: '/github',
+      icon: 'mdi:github'
+    },
+    {
       title: 'API',
       path: 'https://cbv-api.deno.dev/',
       externalLink: true,
       openInNewTab: true,
       icon: 'mdi:graphql'
-    },
-    {
-      title: 'Data Flow Diagram',
-      path: '/dfd',
-      icon: 'carbon:flow-connection'
-    },
-    {
-      title: 'About',
-      path: '/about',
-      icon: 'mdi:information-outline'
     }
   ]
 }
