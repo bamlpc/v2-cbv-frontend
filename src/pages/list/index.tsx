@@ -9,7 +9,6 @@ import PageHeader from 'src/@core/components/page-header'
 // ** Demo Components Imports
 import TableFilter from 'src/views/table/data-grid/TableFilter'
 
-
 const DataGrid = () => {
   return (
     <Grid container spacing={6}>
@@ -21,11 +20,7 @@ const DataGrid = () => {
             </Link>
           </Typography>
         }
-        subtitle={
-          <Typography variant='body2'>
-            Search & Filter at pleasure
-          </Typography>
-        }
+        subtitle={<Typography variant='body2'>Search & Filter at pleasure</Typography>}
       />
       <Grid item xs={12}>
         <TableFilter />
@@ -33,5 +28,7 @@ const DataGrid = () => {
     </Grid>
   )
 }
+
+DataGrid.authGuard = false
 
 export default DataGrid

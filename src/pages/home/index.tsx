@@ -116,9 +116,5 @@ const Home = () => {
   )
 }
 Home.authGuard = false
-Home.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
 
 export default Home

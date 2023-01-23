@@ -38,4 +38,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
   }
 }
 
+UserProfileTab.authGuard = false
+
 export default UserProfileTab

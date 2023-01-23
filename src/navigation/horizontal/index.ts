@@ -5,49 +5,39 @@ const navigation = (): HorizontalNavItemsType => [
   {
     title: 'Home',
     path: '/home',
-    action: 'read',
-    subject: 'acl-page',
     icon: 'mdi:home-outline'
   },
   {
     title: 'CBV',
     path: '/issue/profile',
-    icon: 'mdi:email-outline'
+    icon: 'mdi:file-document-outline'
   },
   {
     title: 'Github',
     path: '/github',
-    action: 'read',
-    subject: 'acl-page',
-    icon: 'mdi:shield-outline'
+    icon: 'mdi:github'
   },
   {
     title: 'Documentation',
     path: '/documentation',
-    action: 'read',
-    subject: 'acl-page',
-    icon: 'mdi:shield-outline'
+    icon: 'mdi:book-open-blank-variant'
   },
   {
     title: 'API',
-    path: '/api',
-    action: 'read',
-    subject: 'acl-page',
-    icon: 'mdi:shield-outline'
+    path: 'https://cbv-api.deno.dev/',
+    externalLink: true,
+    openInNewTab: true,
+    icon: 'mdi:application-export'
   },
   {
     title: 'Data Flow Diagram',
     path: '/dfd',
-    action: 'read',
-    subject: 'acl-page',
-    icon: 'mdi:shield-outline'
+    icon: 'mdi:sitemap-outline'
   },
   {
     title: 'About',
     path: '/about',
-    action: 'read',
-    subject: 'acl-page',
-    icon: 'mdi:shield-outline'
+    icon: 'mdi:information-outline'
   }
 ]
 
