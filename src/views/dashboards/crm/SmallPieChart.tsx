@@ -16,7 +16,11 @@ interface pieDataProps {
   subtitle: string
   labels: Array<string>
   data: Array<number>
+  colorType?: string
 }
+
+const customSeverityColors = ['#e3f658', '#fdcc8a', '#fc8d59', '#d7301f']
+const customBlockchainColors = ['#0868ac', '#2b8cbe', '#4eb3d3', '#7bccc4']
 
 const TotalGrowth = (props: pieDataProps) => {
   // ** Hook
@@ -28,7 +32,7 @@ const TotalGrowth = (props: pieDataProps) => {
   const options: ApexOptions = {
     legend: { show: false },
     stroke: { width: 5, colors: [theme.palette.background.paper] },
-    colors: [theme.palette.primary.main, theme.palette.success.main, theme.palette.secondary.main],
+    colors: props.colorType === 'severity' ? customSeverityColors : customBlockchainColors,
     labels: props.labels,
     tooltip: {
       y: { formatter: (val: number) => `${val}%` }

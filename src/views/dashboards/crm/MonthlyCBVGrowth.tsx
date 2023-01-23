@@ -12,7 +12,11 @@ import { ApexOptions } from 'apexcharts'
 import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
-const CrmMonthlyBudget = () => {
+interface GraphProps {
+  data: Array<number>
+}
+
+const MonthlyCBVGrowth = (props: GraphProps) => {
   // ** Hook
   const theme = useTheme()
 
@@ -97,7 +101,7 @@ const CrmMonthlyBudget = () => {
   return (
     <Card>
       <CardHeader
-        title='Monthly Budget'
+        title='Monthly CBV report'
         action={
           <OptionsMenu
             options={['Refresh', 'Edit', 'Update']}
@@ -110,14 +114,12 @@ const CrmMonthlyBudget = () => {
           type='area'
           height={262}
           options={options}
-          series={[{ name: 'Traffic Rate', data: [0, 85, 25, 125, 90, 250, 200, 350] }]}
+          series={[{ name: 'Traffic Rate', data: props.data }]}
         />
-        <Typography variant='body2'>
-          Last month you had $2.42 expense transactions, 12 savings entries and 4 bills.
-        </Typography>
+        <Typography variant='body2'>Report of new CBV added by month</Typography>
       </CardContent>
     </Card>
   )
 }
 
-export default CrmMonthlyBudget
+export default MonthlyCBVGrowth

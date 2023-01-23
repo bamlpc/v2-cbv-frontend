@@ -1,7 +1,7 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import { useTheme } from '@mui/material/styles'
+import { useTheme, createTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
@@ -19,26 +19,36 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const CrmOrganicSessions = () => {
+interface SeverityIssuesPieProps {
+  data: Array<number>
+  labels: Array<string>
+}
+
+const customColors = {
+  low: '#e3f658',
+  medium: '#fdcc8a',
+  high: '#fc8d59',
+  critical: '#d7301f'
+}
+
+const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {
   // ** Hook
   const theme = useTheme()
-
   const options: ApexOptions = {
     chart: {
       sparkline: { enabled: true }
     },
     colors: [
-      theme.palette.warning.main,
-      hexToRGBA(theme.palette.warning.main, 0.8),
-      hexToRGBA(theme.palette.warning.main, 0.6),
-      hexToRGBA(theme.palette.warning.main, 0.4),
-      hexToRGBA(theme.palette.warning.main, 0.2)
+      hexToRGBA(customColors.low, 1),
+      hexToRGBA(customColors.medium, 1),
+      hexToRGBA(customColors.high, 1),
+      hexToRGBA(customColors.critical, 1)
     ],
     legend: { show: false },
     tooltip: { enabled: false },
     dataLabels: { enabled: false },
     stroke: { width: 3, lineCap: 'round', colors: [theme.palette.background.paper] },
-    labels: ['USA', 'India', 'Canada', 'Japan', 'France'],
+    labels: props.labels,
     states: {
       hover: {
         filter: { type: 'none' }
@@ -65,15 +75,15 @@ const CrmOrganicSessions = () => {
               offsetY: -15,
               fontWeight: 500,
               fontSize: '2.125rem',
-              formatter: value => `${value}k`,
+              formatter: value => `${value}`,
               color: theme.palette.text.primary
             },
             total: {
               show: true,
-              label: '2022',
+              label: 'Total',
               fontSize: '1rem',
               color: theme.palette.text.secondary,
-              formatter: value => `${value.globals.seriesTotals.reduce((total: number, num: number) => total + num)}k`
+              formatter: value => `${value.globals.seriesTotals.reduce((total: number, num: number) => total + num)}`
             }
           }
         }
@@ -92,7 +102,7 @@ const CrmOrganicSessions = () => {
   return (
     <Card>
       <CardHeader
-        title='Organic Sessions'
+        title='Issus by Severity'
         action={
           <OptionsMenu
             options={['Last 28 Days', 'Last Month', 'Last Year']}
@@ -101,55 +111,44 @@ const CrmOrganicSessions = () => {
         }
       />
       <CardContent>
-        <ReactApexcharts type='donut' height={257} options={options} series={[13, 18, 18, 24, 16]} />
+        <ReactApexcharts type='donut' height={257} options={options} series={props.data} />
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: 'warning.main' } }}>
+          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: customColors.low } }}>
             <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>USA</Typography>
+            <Typography variant='body2'>Low</Typography>
           </Box>
           <Box
             sx={{
               mx: 3,
               display: 'flex',
               alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.8) }
+              '& svg': { mr: 1.25, color: hexToRGBA(customColors.medium, 1) }
             }}
           >
             <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>India</Typography>
+            <Typography variant='body2'>Medium</Typography>
           </Box>
           <Box
             sx={{
               mx: 3,
               display: 'flex',
               alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.6) }
+              '& svg': { mr: 1.25, color: hexToRGBA(customColors.high, 1) }
             }}
           >
             <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>Canada</Typography>
+            <Typography variant='body2'>High</Typography>
           </Box>
           <Box
             sx={{
               mx: 3,
               display: 'flex',
               alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.4) }
+              '& svg': { mr: 1.25, color: hexToRGBA(customColors.critical, 1) }
             }}
           >
             <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>Japan</Typography>
-          </Box>
-          <Box
-            sx={{
-              mx: 3,
-              display: 'flex',
-              alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.2) }
-            }}
-          >
-            <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>France</Typography>
+            <Typography variant='body2'>Critical</Typography>
           </Box>
         </Box>
       </CardContent>
@@ -157,4 +156,4 @@ const CrmOrganicSessions = () => {
   )
 }
 
-export default CrmOrganicSessions
+export default SeverityIssuesPie

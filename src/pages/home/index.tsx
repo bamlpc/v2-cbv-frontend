@@ -23,9 +23,9 @@ import CardStatisticsVertical from 'src/@core/components/card-statistics/card-st
 // ** Demo Components Imports
 import TopContributorAward from 'src/views/dashboards/crm/TopContributorAward'
 import TotalGrowth from 'src/views/dashboards/crm/SmallPieChart'
-import CrmMonthlyBudget from 'src/views/dashboards/crm/CrmMonthlyBudget'
+import MonthlyCBVGrowth from 'src/views/dashboards/crm/MonthlyCBVGrowth'
 import CrmWeeklyOverview from 'src/views/dashboards/crm/CrmWeeklyOverview'
-import CrmOrganicSessions from 'src/views/dashboards/crm/CrmOrganicSessions'
+import SeverityIssuesPie from 'src/views/dashboards/crm/SeverityIssuesPie'
 import CrmMostSalesInCountries from 'src/views/dashboards/crm/CrmMostSalesInCountries'
 
 const Home = () => {
@@ -60,7 +60,7 @@ const Home = () => {
             <TotalGrowth // TODO: revisar colores
               title={'Total New CBV'}
               subtitle={'by blockchain'}
-              data={[30, 10, 10, 15]} // TODO: needs to load dinamically
+              data={[30, 15, 10, 10]} // Order by decreace quantity TODO: needs to load dinamically
               labels={['Bitcoin', 'Ethereum', 'Phantama', 'Solana']} // TODO: needs to load dinamically
             />
           </Grid>
@@ -70,19 +70,20 @@ const Home = () => {
               subtitle={'by severity'}
               data={[10, 20, 30, 5]} // TODO: needs to load dinamically
               labels={['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']} // TODO: needs to load dinamically
+              colorType={'severity'}
             />
           </Grid>
           <Grid item xs={12} md={4}>
             <TopContributorAward />
           </Grid>
           <Grid item xs={12} md={4}>
-            <CrmOrganicSessions />
+            <SeverityIssuesPie data={[20, 40, 60, 10]} labels={['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <CrmWeeklyOverview />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <CrmMonthlyBudget />
+            <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />
           </Grid>
           <Grid item xs={12} md={4}>
             <CrmMostSalesInCountries />
