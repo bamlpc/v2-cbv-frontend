@@ -1,64 +1,16 @@
 // ** React Imports
 import { ChangeEvent, useState } from 'react'
 
-// ** MUI Imports
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridColumns, GridRenderCellParams } from '@mui/x-data-grid'
-
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
-import CustomAvatar from 'src/@core/components/mui/avatar'
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
 
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
 import { DataGridRowType } from 'src/@fake-db/types'
 
-// ** Utils Import
-import { getInitials } from 'src/@core/utils/get-initials'
-
-// ** Data Import
+// ** Data Import FROM FAKE DB
 import { rows } from 'src/@fake-db/table/static-data'
-
-interface StatusObj {
-  [key: number]: {
-    title: string
-    color: ThemeColor
-  }
-}
-
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-
-  if (row.avatar.length) {
-    return <CustomAvatar src={`/images/avatars/${row.avatar}`} sx={{ mr: 3, width: '1.875rem', height: '1.875rem' }} />
-  } else {
-    return (
-      <CustomAvatar
-        skin='light'
-        color={color as ThemeColor}
-        sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-      >
-        {getInitials(row.full_name ? row.full_name : 'John Doe')}
-      </CustomAvatar>
-    )
-  }
-}
-
-const statusObj: StatusObj = {
-  1: { title: 'current', color: 'primary' },
-  2: { title: 'professional', color: 'success' },
-  3: { title: 'rejected', color: 'error' },
-  4: { title: 'resigned', color: 'warning' },
-  5: { title: 'applied', color: 'info' }
-}
 
 const escapeRegExp = (value: string) => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -66,98 +18,70 @@ const escapeRegExp = (value: string) => {
 
 const columns: GridColumns = [
   {
-    flex: 0.275,
-    minWidth: 80,
-    field: 'full_name',
+    flex: 0.12,
+    minWidth: 60,
+    field: 'cbv_id',
     headerName: 'CBV Number',
-    renderCell: (params: GridRenderCellParams) => {
-      const { row } = params
-
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.full_name}
-            </Typography>
-            <Typography noWrap variant='caption'>
-              {row.email}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.2,
-    minWidth: 120,
-    headerName: 'Last updated',
-    field: 'start_date',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.start_date}
+        {params.row.cbv.cbv_id}
       </Typography>
     )
   },
   {
-    flex: 0.2,
-    minWidth: 110,
-    field: 'salary',
-    headerName: 'Severity',
+    flex: 0.1,
+    minWidth: 60,
+    field: 'blockchain',
+    headerName: 'Blockchain',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.salary}
+        {params.row.cbv.blockchain}
       </Typography>
     )
   },
   {
-    flex: 0.125,
-    field: 'age',
-    minWidth: 80,
+    flex: 0.38,
+    field: 'title',
+    minWidth: 150,
     headerName: 'Title',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.age}
+        {params.row.cbv.title}
       </Typography>
     )
   },
   {
-    flex: 0.2,
-    minWidth: 140,
-    field: 'status',
-    headerName: 'Blockchain',
-    renderCell: (params: GridRenderCellParams) => {
-      const status = statusObj[params.row.status]
-
-      return (
-        <CustomChip
-          size='small'
-          skin='light'
-          color={status.color}
-          label={status.title}
-          sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
-        />
-      )
-    }
+    flex: 0.1,
+    minWidth: 60,
+    field: 'severiry',
+    headerName: 'Severity',
+    renderCell: (params: GridRenderCellParams) => (
+      <Typography variant='body2' sx={{ color: 'text.primary' }}>
+        {params.row.cbv.severity}
+      </Typography>
+    )
   },
   {
-    flex: 0.2,
+    flex: 0.15,
+    minWidth: 120,
+    headerName: 'Last updated',
+    field: 'last_updated',
+    renderCell: (params: GridRenderCellParams) => (
+      <Typography variant='body2' sx={{ color: 'text.primary' }}>
+        {params.row.cbv.created_at}
+      </Typography>
+    )
+  },
+  {
+    flex: 0.15,
     minWidth: 80,
     field: 'credits',
     headerName: 'Credits',
-    renderCell: (params: GridRenderCellParams) => {
-      const status = statusObj[params.row.status]
-
-      return (
-        <CustomChip
-          size='small'
-          skin='light'
-          color={status.color}
-          label={status.title}
-          sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
-        />
-      )
-    }
+    renderCell: (params: GridRenderCellParams) => (
+      <Typography variant='body2' sx={{ color: 'text.primary' }}>
+        {params.row.cbv.credits}
+      </Typography>
+    )
   }
 ]
 
@@ -186,7 +110,6 @@ const TableColumns = () => {
 
   return (
     <Card>
-      <CardHeader title='Quick Filter' />
       <DataGrid
         autoHeight
         columns={columns}
@@ -208,26 +131,6 @@ const TableColumns = () => {
       />
     </Card>
   )
-}
-
-function getTestData() {
-  const arr = []
-  const _blockchain = ['Bitcoin', 'Ethereum', 'Polygon', 'Phantasma']
-  const _credits = ['@lukeciatt', '@BMogetta', 'Luciano Ciattaglia', 'Bruno Mogetta']
-  const _date = ['01 JAN 23', '02 JAN 23', '03 JAN 23', '04 JAN 23']
-
-  for (let i = 10; i < 61; i++) {
-    arr.push({
-      cbv: {
-        title: `Title entry number ${i}`,
-        cbv_id: `CBV-23-0000${i}`,
-        blockchain: _blockchain[Math.floor(Math.random() * _blockchain.length)],
-        severity: (Math.random() * 10).toFixed(1),
-        updated_at: _date[Math.floor(Math.random() * _date.length)],
-        credits: _credits[Math.floor(Math.random() * _credits.length)]
-      }
-    })
-  }
 }
 
 export default TableColumns

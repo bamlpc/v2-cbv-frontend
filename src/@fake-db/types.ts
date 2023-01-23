@@ -145,16 +145,17 @@ export type UserProfileActiveTab = ProfileTabType | TeamsTabType[] | ProjectsTab
 //---------------
 export type DataGridRowType = {
   id: number
-  age: string
-  post: string
-  city: string
-  email: string
-  salary: number
-  status: number
-  avatar: string
-  full_name: string
-  start_date: string
-  experience: string
+  cbv: CBV
+}
+
+type CBV = {
+  title: string
+  cbv_id: string
+  blockchain: string
+  severity: number
+  created_at: string
+  updated_at: string
+  credits: string
 }
 
 // Help Center
