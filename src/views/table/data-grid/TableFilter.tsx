@@ -3,7 +3,6 @@ import { ChangeEvent, useState } from 'react'
 
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridColumns, GridRenderCellParams } from '@mui/x-data-grid'
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
 
