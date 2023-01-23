@@ -27,12 +27,12 @@ const navigation = (): HorizontalNavItemsType => [
     path: 'https://cbv-api.deno.dev/',
     externalLink: true,
     openInNewTab: true,
-    icon: 'mdi:application-export'
+    icon: 'mdi:graphql'
   },
   {
     title: 'Data Flow Diagram',
     path: '/dfd',
-    icon: 'mdi:sitemap-outline'
+    icon: 'carbon:flow-connection'
   },
   {
     title: 'About',

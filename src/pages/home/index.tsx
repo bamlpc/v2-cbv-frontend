@@ -43,17 +43,17 @@ const Home = () => {
               trendNumber='+20'
               title='Total'
               chipText='Last Month'
-              icon={<Icon icon='mdi:cart-plus' />} // TODO: revisar icono para mostrar
+              icon={<Icon icon='fluent-mdl2:issue-tracking' />} // TODO: revisar icono para mostrar
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             <CardStatisticsVertical
               stats='Most Issues'
-              color='success'
+              color='primary'
               trendNumber='+4'
               title='Bitcoin'
               chipText='Last Month'
-              icon={<Icon icon='mdi:currency-usd' />} // TODO: revisar icono para mostrar
+              icon={<Icon icon='eos-icons:blockchain' />} // TODO: revisar icono para mostrar
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
@@ -74,7 +74,7 @@ const Home = () => {
             />
           </Grid>
           <Grid item xs={12} md={4}>
-            <TopContributorAward />
+            <TopContributorAward user={'@BMogetta'} amount={'5'} />
           </Grid>
           <Grid item xs={12} md={4}>
             <SeverityIssuesPie data={[20, 40, 60, 10]} labels={['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']} />

@@ -17,14 +17,20 @@ const TrophyImg = styled('img')(({ theme }) => ({
   }
 }))
 
-const TopContributorAward = () => {
+interface TopContributorProps {
+  user: string
+  amount: string
+}
+
+//TODO: AND ACTION TO BUTTON FOR SEARCH USERS CONTRIBUTION
+const TopContributorAward = (props: TopContributorProps) => {
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent>
         <Typography variant='h6'>
           Congratulations{' '}
           <Box component='span' sx={{ fontWeight: 'bold' }}>
-            @BMogetta
+            {props.user}
           </Box>
           🎉
         </Typography>
@@ -32,7 +38,7 @@ const TopContributorAward = () => {
           Top contributor of the month
         </Typography>
         <Typography variant='h5' sx={{ fontWeight: 600, color: 'primary.main' }}>
-          5 issues
+          {props.amount} issues
         </Typography>
         <Typography variant='body2' sx={{ mb: 3.25 }}>
           🤟🏻
