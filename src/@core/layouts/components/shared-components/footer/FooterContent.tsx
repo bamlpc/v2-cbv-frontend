@@ -12,31 +12,23 @@ const FooterContent = () => {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
       <Typography sx={{ mr: 2 }}>
-        {`© ${new Date().getFullYear()}, Made with `}
-        <Box component='span' sx={{ color: 'error.main' }}>
-          ❤️
-        </Box>
-        {` by `}
-        <Link target='_blank' href='https://pixinvent.com/'>
-          Pixinvent
+        {`© ${new Date().getFullYear()}, Made `}
+        {` for `}
+        <Link target='_blank' href='https://hacken.io/'>
+          Hacken
+        </Link>
+        {' by '}
+        <Link target='_blank' href='https://github.com/BMogetta'>
+          Bruno Mogetta
         </Link>
       </Typography>
       {hidden ? null : (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', '& :not(:last-child)': { mr: 4 } }}>
-          <Link target='_blank' href='https://themeforest.net/licenses/standard'>
+          <Link target='_blank' href='/about'>
+            About
+          </Link>
+          <Link target='_blank' href='https://github.com/bamlpc/common-blockchain-vulnerabilities/blob/main/LICENSE'>
             License
-          </Link>
-          <Link target='_blank' href='https://1.envato.market/pixinvent_portfolio'>
-            More Themes
-          </Link>
-          <Link
-            target='_blank'
-            href='https://pixinvent.com/demo/materialize-mui-react-nextjs-admin-template/documentation'
-          >
-            Documentation
-          </Link>
-          <Link target='_blank' href='https://pixinvent.ticksy.com/'>
-            Support
           </Link>
         </Box>
       )}

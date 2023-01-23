@@ -67,9 +67,9 @@ const escapeRegExp = (value: string) => {
 const columns: GridColumns = [
   {
     flex: 0.275,
-    minWidth: 290,
+    minWidth: 80,
     field: 'full_name',
-    headerName: 'Name',
+    headerName: 'CBV Number',
     renderCell: (params: GridRenderCellParams) => {
       const { row } = params
 
@@ -91,7 +91,7 @@ const columns: GridColumns = [
   {
     flex: 0.2,
     minWidth: 120,
-    headerName: 'Date',
+    headerName: 'Last updated',
     field: 'start_date',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
@@ -103,7 +103,7 @@ const columns: GridColumns = [
     flex: 0.2,
     minWidth: 110,
     field: 'salary',
-    headerName: 'Salary',
+    headerName: 'Severity',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
         {params.row.salary}
@@ -114,7 +114,7 @@ const columns: GridColumns = [
     flex: 0.125,
     field: 'age',
     minWidth: 80,
-    headerName: 'Age',
+    headerName: 'Title',
     renderCell: (params: GridRenderCellParams) => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
         {params.row.age}
@@ -125,7 +125,7 @@ const columns: GridColumns = [
     flex: 0.2,
     minWidth: 140,
     field: 'status',
-    headerName: 'Status',
+    headerName: 'Blockchain',
     renderCell: (params: GridRenderCellParams) => {
       const status = statusObj[params.row.status]
 
