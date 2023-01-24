@@ -1,9 +1,3 @@
-// ** React Imports
-import { useContext } from 'react'
-
-// ** Context Imports
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -26,12 +20,10 @@ import TotalGrowth from 'src/views/dashboards/crm/SmallPieChart'
 import MonthlyCBVGrowth from 'src/views/dashboards/crm/MonthlyCBVGrowth'
 import CrmWeeklyOverview from 'src/views/dashboards/crm/CrmWeeklyOverview'
 import SeverityIssuesPie from 'src/views/dashboards/crm/SeverityIssuesPie'
-import CrmMostSalesInCountries from 'src/views/dashboards/crm/CrmMostSalesInCountries'
+import ContributorsRanking from 'src/views/dashboards/crm/ContributorsRanking'
+import LastAddedIssues from 'src/views/dashboards/crm/LastAddedIssues'
 
 const Home = () => {
-  // ** Hooks
-  const ability = useContext(AbilityContext)
-
   return (
     <>
       <ApexChartWrapper>
@@ -85,31 +77,12 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={4}>
             <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <CrmMostSalesInCountries />
+          <Grid item xs={12} md={6}>
+            <ContributorsRanking />
           </Grid>
-          <Grid item md={6} xs={12}>
-            <Card>
-              <CardHeader title='Common' />
-              <CardContent>
-                <Typography sx={{ mb: 4 }}>No ability is required to view this card</Typography>
-                <Typography sx={{ color: 'primary.main' }}>This card is visible to 'user' and 'admin' both</Typography>
-              </CardContent>
-            </Card>
+          <Grid item xs={12} md={6}>
+            <LastAddedIssues />
           </Grid>
-          {ability?.can('read', 'analytics') ? (
-            <Grid item md={6} xs={12}>
-              <Card>
-                <CardHeader title='Analytics' />
-                <CardContent>
-                  <Typography sx={{ mb: 4 }}>
-                    User with 'Analytics' subject's 'Read' ability can view this card
-                  </Typography>
-                  <Typography sx={{ color: 'error.main' }}>This card is visible to 'admin' only</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ) : null}
         </Grid>
       </ApexChartWrapper>
     </>
