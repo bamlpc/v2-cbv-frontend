@@ -1,9 +1,5 @@
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -18,7 +14,7 @@ import CardStatisticsVertical from 'src/@core/components/card-statistics/card-st
 import TopContributorAward from 'src/views/dashboards/crm/TopContributorAward'
 import TotalGrowth from 'src/views/dashboards/crm/SmallPieChart'
 import MonthlyCBVGrowth from 'src/views/dashboards/crm/MonthlyCBVGrowth'
-import CrmWeeklyOverview from 'src/views/dashboards/crm/CrmWeeklyOverview'
+import LastSixMonthIssues from 'src/views/dashboards/crm/LastSixMonthIssues'
 import SeverityIssuesPie from 'src/views/dashboards/crm/SeverityIssuesPie'
 import ContributorsRanking from 'src/views/dashboards/crm/ContributorsRanking'
 import LastAddedIssues from 'src/views/dashboards/crm/LastAddedIssues'
@@ -72,7 +68,7 @@ const Home = () => {
             <SeverityIssuesPie data={[20, 40, 60, 10]} labels={['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <CrmWeeklyOverview />
+            <LastSixMonthIssues data={[10, 15, 25, 22, 65, 65]} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />

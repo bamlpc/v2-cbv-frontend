@@ -17,20 +17,46 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const series = [
-  {
-    name: 'Sales',
-    type: 'column',
-    data: [83, 68, 56, 65, 65, 50, 39]
-  },
-  {
-    type: 'line',
-    name: 'Sales',
-    data: [63, 38, 31, 45, 46, 27, 18]
+function getLastSixMonth() {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ]
+  const today = new Date()
+  const month = []
+  for (let i = 5; i > -1; i -= 1) {
+    const d = new Date(today.getFullYear(), today.getMonth() - i, 1)
+    month.push(monthNames[d.getMonth()])
   }
-]
 
-const CrmWeeklyOverview = () => {
+  return month
+}
+
+const LastSixMonthIssues = (props: Record<string, number[]>) => {
+  const series = [
+    {
+      name: 'Issues',
+      type: 'column',
+      data: props.data
+    },
+    {
+      type: 'line',
+      name: 'Issues',
+      data: props.data
+    }
+  ]
+  const max_height = Math.max(...props.data) * 1.15 //extra 15% for display clarity
+
   // ** Hook
   const theme = useTheme()
 
@@ -86,7 +112,7 @@ const CrmWeeklyOverview = () => {
       }
     },
     xaxis: {
-      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      categories: getLastSixMonth(),
       tickPlacement: 'on',
       labels: { show: false },
       axisTicks: { show: false },
@@ -94,11 +120,11 @@ const CrmWeeklyOverview = () => {
     },
     yaxis: {
       min: 0,
-      max: 90,
+      max: max_height,
       show: true,
       tickAmount: 3,
       labels: {
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`,
+        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}k` : Math.floor(value)}`,
         style: {
           fontSize: '0.75rem',
           colors: theme.palette.text.disabled
@@ -110,7 +136,7 @@ const CrmWeeklyOverview = () => {
   return (
     <Card>
       <CardHeader
-        title='Weekly Overview'
+        title='Issues added in the last 6 months'
         action={
           <OptionsMenu
             options={['Refresh', 'Update', 'Share']}
@@ -120,12 +146,6 @@ const CrmWeeklyOverview = () => {
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
         <ReactApexcharts type='line' height={208} series={series} options={options} />
-        <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-          <Typography sx={{ mr: 4 }} variant='h5'>
-            62%
-          </Typography>
-          <Typography variant='body2'>Your sales performance is 35% 😎 better compared to last month</Typography>
-        </Box>
         <Button fullWidth variant='contained'>
           Details
         </Button>
@@ -134,4 +154,4 @@ const CrmWeeklyOverview = () => {
   )
 }
 
-export default CrmWeeklyOverview
+export default LastSixMonthIssues
