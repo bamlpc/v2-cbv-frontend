@@ -25,7 +25,7 @@ import Icon from 'src/@core/components/icon'
 
 // ** Demo Components
 import Details from 'src/views/pages/issue/details'
-import Main from 'src/views/pages/issue/[main]'
+import Main from 'src/views/pages/issue/main'
 import Test from 'src/views/pages/issue/tests'
 import References from 'src/views/pages/issue/references'
 import UserProfileHeader from 'src/views/pages/issue/UserProfileHeader'

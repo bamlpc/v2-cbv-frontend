@@ -17,7 +17,7 @@ const UserProfileTab = ({ tab, data }: InferGetStaticPropsType<typeof getStaticP
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [
-      { params: { tab: ['main'] } },
+      { params: { tab: 'main' } },
       { params: { tab: 'details' } },
       { params: { tab: 'tests' } },
       { params: { tab: 'references' } }

@@ -2,7 +2,7 @@
 import Grid from '@mui/material/Grid'
 
 // ** Demo Components
-import InformationOverview from 'src/views/pages/issue/[main]/InformationOverview'
+import InformationOverview from 'src/views/pages/issue/main/InformationOverview'
 
 //** Types
 import { PropsCBV } from 'src/context/types'
