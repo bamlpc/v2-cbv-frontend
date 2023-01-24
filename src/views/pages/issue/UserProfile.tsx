@@ -17,22 +17,17 @@ import MuiTabList, { TabListProps } from '@mui/lab/TabList'
 import CircularProgress from '@mui/material/CircularProgress'
 
 // ** Type Import
-import {
-  TeamsTabType,
-  ProfileTabType,
-  ProjectsTabType,
-  ConnectionsTabType,
-  UserProfileActiveTab
-} from 'src/@fake-db/types'
+import { UserProfileActiveTab } from 'src/@fake-db/types'
+import { PropsCBV } from 'src/context/types'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
 // ** Demo Components
-import Teams from 'src/views/pages/issue/teams'
-import Profile from 'src/views/pages/issue/profile'
-import Projects from 'src/views/pages/issue/projects'
-import Connections from 'src/views/pages/issue/connections'
+import Details from 'src/views/pages/issue/details'
+import Main from 'src/views/pages/issue/[main]'
+import Test from 'src/views/pages/issue/tests'
+import References from 'src/views/pages/issue/references'
 import UserProfileHeader from 'src/views/pages/issue/UserProfileHeader'
 
 const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
@@ -86,62 +81,78 @@ const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab])
 
+  const propsCBV: PropsCBV = {
+    id: '1122551',
+    cbv: {
+      title: 'Un dicho criollo',
+      short_description: 'cortito como patada de chancho',
+      cbv_id: 'CBV-23-000001',
+      details:
+        'dnbapsidubaspiduasbi0pduasbdioasbdasiodbasioudbasiopdas doasbdpoasjdbasiodbjasiodas dbopasijbdaiopsjdbasiodhabsdas',
+      blockchain: 'Bitcoin',
+      version_affected: '0.5',
+      severity: '5.5',
+      vulnerability_type: 'dadas',
+      component: 'adasda',
+      created_at: '15 JUN 23',
+      updated_at: '18 JUN 23',
+      references: 'none',
+      test: 'No test register, colaborate',
+      credits: '@BMogetta'
+    }
+  }
+
   const tabContentList: { [key: string]: ReactElement } = {
-    profile: <Profile data={data as ProfileTabType} />,
-    teams: <Teams data={data as TeamsTabType[]} />,
-    projects: <Projects data={data as ProjectsTabType[]} />,
-    connections: <Connections data={data as ConnectionsTabType[]} />
+    main: <Main data={propsCBV as PropsCBV} />,
+    details: <Details data={propsCBV as PropsCBV} />,
+    tests: <Test data={propsCBV as PropsCBV} />,
+    references: <References data={propsCBV as PropsCBV} />
   }
 
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
-        <UserProfileHeader />
+        {<UserProfileHeader />}
       </Grid>
       {activeTab === undefined ? null : (
         <Grid item xs={12}>
           <TabContext value={activeTab}>
             <Grid container spacing={6}>
               <Grid item xs={12}>
-                <TabList
-                  variant='scrollable'
-                  scrollButtons='auto'
-                  onChange={handleChange}
-                  aria-label='customized tabs example'
-                >
+                <TabList variant='scrollable' scrollButtons='auto' onChange={handleChange}>
                   <Tab
-                    value='profile'
+                    value='main'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
                         <Icon icon='mdi:account-outline' />
-                        {!hideText && 'Profile'}
+                        {!hideText && 'CBV'}
                       </Box>
                     }
                   />
                   <Tab
-                    value='teams'
+                    value='details'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
                         <Icon icon='mdi:account-multiple-outline' />
-                        {!hideText && 'Teams'}
+                        {!hideText && 'Details'}
                       </Box>
                     }
                   />
                   <Tab
-                    value='projects'
+                    value='tests'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
                         <Icon icon='mdi:view-grid-outline' />
-                        {!hideText && 'Projects'}
+                        {!hideText && 'Test'}
                       </Box>
                     }
                   />
                   <Tab
-                    value='connections'
+                    value='references'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
                         <Icon icon='mdi:link-variant' />
-                        {!hideText && 'Connections'}
+                        {!hideText && 'references'}
                       </Box>
                     }
                   />

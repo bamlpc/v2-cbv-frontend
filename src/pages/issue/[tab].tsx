@@ -17,10 +17,10 @@ const UserProfileTab = ({ tab, data }: InferGetStaticPropsType<typeof getStaticP
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [
-      { params: { tab: 'profile' } },
-      { params: { tab: 'teams' } },
-      { params: { tab: 'projects' } },
-      { params: { tab: 'connections' } }
+      { params: { tab: 'main' } },
+      { params: { tab: 'details' } },
+      { params: { tab: 'tests' } },
+      { params: { tab: 'references' } }
     ],
     fallback: false
   }

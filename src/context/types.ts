@@ -31,3 +31,25 @@ export type AuthValuesType = {
   login: (params: LoginParams, errorCallback?: ErrCallbackType) => void
   register: (params: RegisterParams, errorCallback?: ErrCallbackType) => void
 }
+
+export type PropsCBV = {
+  id: string
+  cbv: CBV
+}
+
+export type CBV = {
+  title: string
+  short_description: string
+  cbv_id: string
+  blockchain: string
+  details: string
+  version_affected: string
+  severity: string
+  vulnerability_type: string
+  component: string
+  created_at: string
+  updated_at: string
+  references: string
+  test: string
+  credits: string
+}

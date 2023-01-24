@@ -13,10 +13,10 @@ import {
 
 interface DataType {
   profileHeader: ProfileHeaderType
-  profile: ProfileTabType
-  teams: TeamsTabType[]
-  projects: ProjectsTabType[]
-  connections: ConnectionsTabType[]
+  main: ProfileTabType
+  details: TeamsTabType[]
+  tests: ProjectsTabType[]
+  references: ConnectionsTabType[]
 }
 
 const data: DataType = {
@@ -29,7 +29,7 @@ const data: DataType = {
     designationIcon: 'mdi:fountain-pen-tip',
     coverImg: '/images/pages/profile-banner.png'
   },
-  profile: {
+  main: {
     about: [
       { property: 'Full Name', value: 'John Doe', icon: 'mdi:account-outline' },
       { property: 'Status', value: 'active', icon: 'mdi:check' },
@@ -121,7 +121,7 @@ const data: DataType = {
       }
     ]
   },
-  teams: [
+  details: [
     {
       extraMembers: 25,
       title: 'React Developers',
@@ -299,7 +299,7 @@ const data: DataType = {
       ]
     }
   ],
-  projects: [
+  tests: [
     {
       daysLeft: 28,
       comments: 15,
@@ -439,7 +439,7 @@ const data: DataType = {
       ]
     }
   ],
-  connections: [
+  references: [
     {
       tasks: '834',
       projects: '18',
