@@ -4,11 +4,11 @@ import { ChangeEvent, useState } from 'react'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid, GridColumns, GridRenderCellParams } from '@mui/x-data-grid'
-import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
-
-import { DataGridRowType } from 'src/@fake-db/types'
+import QuickSearchToolbar from 'src/views/pages/list/QuickSearchToolbar'
+import SearchHeader from 'src/views/pages/list/SearchHeader'
 
 // ** Data Import FROM FAKE DB
+import { DataGridRowType } from 'src/@fake-db/types'
 import { rows } from 'src/@fake-db/table/static-data'
 
 const escapeRegExp = (value: string) => {
@@ -108,27 +108,30 @@ const TableColumns = () => {
   }
 
   return (
-    <Card>
-      <DataGrid
-        autoHeight
-        columns={columns}
-        pageSize={pageSize}
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        components={{ Toolbar: QuickSearchToolbar }}
-        rows={filteredData.length ? filteredData : data}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-        componentsProps={{
-          baseButton: {
-            variant: 'outlined'
-          },
-          toolbar: {
-            value: searchText,
-            clearSearch: () => handleSearch(''),
-            onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
-          }
-        }}
-      />
-    </Card>
+    <>
+      <SearchHeader data={['a', 'b']} allArticles={['c', 'd']} />
+      <Card>
+        <DataGrid
+          autoHeight
+          columns={columns}
+          pageSize={pageSize}
+          rowsPerPageOptions={[7, 10, 25, 50]}
+          components={{ Toolbar: QuickSearchToolbar }}
+          rows={filteredData.length ? filteredData : data}
+          onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+          componentsProps={{
+            baseButton: {
+              variant: 'outlined'
+            },
+            toolbar: {
+              value: searchText,
+              clearSearch: () => handleSearch(''),
+              onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
+            }
+          }}
+        />
+      </Card>
+    </>
   )
 }
 

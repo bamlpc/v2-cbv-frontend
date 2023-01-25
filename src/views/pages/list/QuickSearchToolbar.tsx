@@ -1,22 +1,23 @@
 // ** React Imports
-import { ChangeEvent } from 'react'
+//import { ChangeEvent } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import IconButton from '@mui/material/IconButton'
+
+//import TextField from '@mui/material/TextField'
+//import IconButton from '@mui/material/IconButton'
 import { GridToolbarFilterButton } from '@mui/x-data-grid'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon'
+//import Icon from 'src/@core/components/icon'
 
-interface Props {
+/* interface Props {
   value: string
   clearSearch: () => void
   onChange: (e: ChangeEvent) => void
-}
+} */
 
-const QuickSearchToolbar = (props: Props) => {
+const QuickSearchToolbar = (/*props: Props*/) => {
   return (
     <Box
       sx={{
@@ -29,7 +30,7 @@ const QuickSearchToolbar = (props: Props) => {
       }}
     >
       <GridToolbarFilterButton />
-      <TextField
+      {/* <TextField
         size='small'
         value={props.value}
         onChange={props.onChange}
@@ -55,7 +56,7 @@ const QuickSearchToolbar = (props: Props) => {
             mr: 2
           }
         }}
-      />
+      /> */}
     </Box>
   )
 }

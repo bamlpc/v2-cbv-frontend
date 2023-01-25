@@ -35,6 +35,7 @@ export type AuthValuesType = {
 export type PropsCBV = {
   id: string
   cbv: CBV
+  timestamp: number
 }
 
 export type CBV = {
@@ -44,7 +45,7 @@ export type CBV = {
   blockchain: string
   details: string
   version_affected: string
-  severity: string
+  severity: number
   vulnerability_type: string
   component: string
   created_at: string

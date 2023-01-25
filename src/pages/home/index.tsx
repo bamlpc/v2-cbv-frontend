@@ -11,13 +11,13 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import CardStatisticsVertical from 'src/@core/components/card-statistics/card-stats-vertical'
 
 // ** Demo Components Imports
-import TopContributorAward from 'src/views/dashboards/crm/TopContributorAward'
-import TotalGrowth from 'src/views/dashboards/crm/SmallPieChart'
-import MonthlyCBVGrowth from 'src/views/dashboards/crm/MonthlyCBVGrowth'
-import LastSixMonthIssues from 'src/views/dashboards/crm/LastSixMonthIssues'
-import SeverityIssuesPie from 'src/views/dashboards/crm/SeverityIssuesPie'
-import ContributorsRanking from 'src/views/dashboards/crm/ContributorsRanking'
-import LastAddedIssues from 'src/views/dashboards/crm/LastAddedIssues'
+import TopContributorAward from 'src/views/pages/home/TopContributorAward'
+import TotalGrowth from 'src/views/pages/home/SmallPieChart'
+import MonthlyCBVGrowth from 'src/views/pages/home/MonthlyCBVGrowth'
+import LastSixMonthIssues from 'src/views/pages/home/LastSixMonthIssues'
+import SeverityIssuesPie from 'src/views/pages/home/SeverityIssuesPie'
+import ContributorsRanking from 'src/views/pages/home/ContributorsRanking'
+import LastAddedIssues from 'src/views/pages/home/LastAddedIssues'
 
 const Home = () => {
   return (
