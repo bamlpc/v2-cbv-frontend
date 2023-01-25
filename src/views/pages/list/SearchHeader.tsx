@@ -2,7 +2,7 @@
 import { useState, ChangeEvent, useContext } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
@@ -65,7 +65,8 @@ const SearchHeader = () => {
   const [value, setValue] = useState<string | unknown | QueryFilter | null>(null)
   const [open, setOpen] = useState<boolean>(false)
 
-  const { searchStringQuery, setSearchStringQuery } = useContext(QueryContext)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { searchStringQuery, setSearchStringQuery }: any = useContext(QueryContext)
 
   console.log({ value })
 
@@ -113,6 +114,7 @@ const SearchHeader = () => {
           />
         )}
         renderOption={(props, option: string | unknown) => {
+          // @ts-ignore
           return value.length ? (
             <ListItem
               {...props}

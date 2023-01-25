@@ -45,7 +45,7 @@ export type CBV = {
   blockchain: string
   details: string
   version_affected: string
-  severity: number
+  severity: string
   vulnerability_type: string
   component: string
   created_at: string
