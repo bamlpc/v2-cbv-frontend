@@ -1,100 +1,72 @@
 // ** React Imports
-import { ChangeEvent, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
+//
 import Card from '@mui/material/Card'
-import Typography from '@mui/material/Typography'
-import { DataGrid, GridColumns, GridRenderCellParams } from '@mui/x-data-grid'
-import QuickSearchToolbar from 'src/views/pages/list/QuickSearchToolbar'
+import { DataGrid } from '@mui/x-data-grid'
+
+//
 import SearchHeader from 'src/views/pages/list/SearchHeader'
+import { PropsCBV } from 'src/context/types'
+import columns from './Columns'
+import { QueryContext } from './QueryContext'
 
-// ** Data Import FROM FAKE DB
-import { DataGridRowType } from 'src/@fake-db/types'
-import { rows } from 'src/@fake-db/table/static-data'
-
-const escapeRegExp = (value: string) => {
+/* const escapeRegExp = (value: string) => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-}
-
-const columns: GridColumns = [
-  {
-    flex: 0.12,
-    minWidth: 60,
-    field: 'cbv_id',
-    headerName: 'CBV Number',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.cbv_id}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.1,
-    minWidth: 60,
-    field: 'blockchain',
-    headerName: 'Blockchain',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.blockchain}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.38,
-    field: 'title',
-    minWidth: 150,
-    headerName: 'Title',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.title}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.1,
-    minWidth: 60,
-    field: 'severiry',
-    headerName: 'Severity',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.severity}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.15,
-    minWidth: 120,
-    headerName: 'Last updated',
-    field: 'last_updated',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.created_at}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.15,
-    minWidth: 80,
-    field: 'credits',
-    headerName: 'Credits',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.cbv.credits}
-      </Typography>
-    )
-  }
-]
+} */
 
 const TableColumns = () => {
   // ** States
-  const [data] = useState<DataGridRowType[]>(rows)
   const [pageSize, setPageSize] = useState<number>(7)
-  const [searchText, setSearchText] = useState<string>('')
-  const [filteredData, setFilteredData] = useState<DataGridRowType[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchText, setSearchText] = useState<string>('cbv')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [filteredData, setFilteredData] = useState<PropsCBV[]>([])
+  const [apiData, setApiData] = useState(Object)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchStringQuery, setSearchStringQuery] = useState('cbv')
 
-  const handleSearch = (searchValue: string) => {
+  // agregar un iff donde, si hay querie params, llame a set querie y los use
+  /* const searchStringQuery = 'cbv' */
+
+  useEffect(() => {
+    const queryString = searchStringQuery ? searchStringQuery : 'cbv'
+    const dataFetch = async () => {
+      const _data = await (
+        await fetch('https://cbv-api.deno.dev/graphql', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `
+           query{
+             find_by_search_string(search_string: "${queryString}"){
+               _id
+               cbv{
+                 cbv_id
+                 title
+                 blockchain
+                 severity
+                 created_at
+                 updated_at
+               }
+             }
+           }`
+          })
+        })
+      ).json()
+      setApiData(_data.data.find_by_search_string)
+    }
+    dataFetch()
+  }, [searchStringQuery])
+
+  console.log('search text: ', searchText)
+
+  /*   const handleSearch = (searchValue: string) => {
+    console.log('search value: ', searchValue)
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
-    const filteredRows = data.filter(row => {
+    const filteredRows = apiData.filter((row: PropsCBV) => {
       return Object.keys(row).some(field => {
         // @ts-ignore
         return searchRegex.test(row[field].toString())
@@ -105,33 +77,23 @@ const TableColumns = () => {
     } else {
       setFilteredData([])
     }
-  }
+  } */
 
   return (
-    <>
-      <SearchHeader data={['a', 'b']} allArticles={['c', 'd']} />
+    <QueryContext.Provider value={{ searchStringQuery, setSearchStringQuery }}>
+      <SearchHeader />
       <Card>
         <DataGrid
           autoHeight
-          columns={columns}
+          columns={columns()}
           pageSize={pageSize}
           rowsPerPageOptions={[7, 10, 25, 50]}
-          components={{ Toolbar: QuickSearchToolbar }}
-          rows={filteredData.length ? filteredData : data}
+          rows={filteredData.length ? filteredData : apiData}
+          getRowId={apiData => apiData._id}
           onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-          componentsProps={{
-            baseButton: {
-              variant: 'outlined'
-            },
-            toolbar: {
-              value: searchText,
-              clearSearch: () => handleSearch(''),
-              onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
-            }
-          }}
-        />
+        ></DataGrid>
       </Card>
-    </>
+    </QueryContext.Provider>
   )
 }
 

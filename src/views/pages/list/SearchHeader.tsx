@@ -1,33 +1,25 @@
 // ** React Imports
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useContext } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
 
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
-import ListItem from '@mui/material/ListItem'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import ListItemButton from '@mui/material/ListItemButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
-
-// ** Type Import
-import {
-  HelpCenterCategoriesType,
-  HelpCenterSubcategoriesType,
-  HelpCenterSubcategoryArticlesType
-} from 'src/@fake-db/types'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
+import { SyntheticEvent } from 'react-draft-wysiwyg'
 
-interface Props {
-  data: HelpCenterCategoriesType[]
-  allArticles: HelpCenterSubcategoryArticlesType[]
-}
+//
+import { QueryContext } from './QueryContext'
 
 // Styled Autocomplete component
 const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
@@ -57,38 +49,25 @@ const CardContentNoPadding = styled(CardContent)(`
   }
 `)
 
-const SearchHeader = ({ data, allArticles }: Props) => {
+type QueryFilter = {
+  id: number
+  label: string
+}
+const queryFilters = ['Layer 1', 'Layer 2', 'Bitcoin', 'Phantasma', 'Ethereum', 'Polygon']
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const queryFiltersOptions = queryFilters.map((queryFilter, index) => ({
+  id: index + 1,
+  label: queryFilter
+}))
+
+const SearchHeader = () => {
   // ** States
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string | unknown | QueryFilter | null>(null)
   const [open, setOpen] = useState<boolean>(false)
 
-  // ** Hooks & Vars
-  const router = useRouter()
+  const { searchStringQuery, setSearchStringQuery } = useContext(QueryContext)
 
-  const handleRedirection = (option: HelpCenterSubcategoryArticlesType) => {
-    setOpen(false)
-    setValue(option.title)
-    let currentSubcategory: HelpCenterSubcategoriesType | null = null
-    const currentCategory = data.find(category =>
-      category.subCategories.find(subcategory =>
-        subcategory.articles.find(article => {
-          if (option.slug === article.slug) {
-            currentSubcategory = subcategory
-          }
-
-          return option.slug === article.slug
-        })
-      )
-    )
-
-    if (currentSubcategory !== null) {
-      router.push(
-        `/pages/help-center/${currentCategory?.slug}/${(currentSubcategory as HelpCenterSubcategoriesType).slug}/${
-          option.slug
-        }`
-      )
-    }
-  }
+  console.log({ value })
 
   return (
     <CardContentNoPadding
@@ -106,21 +85,13 @@ const SearchHeader = ({ data, allArticles }: Props) => {
       </Typography>
 
       <Autocomplete
+        freeSolo={true}
         open={open}
-        disablePortal
-        inputValue={value}
-        options={allArticles}
+        options={queryFilters}
         onClose={() => setOpen(false)}
         sx={{ my: 4, '& + .MuiAutocomplete-popper .MuiAutocomplete-listbox': { maxHeight: 250 } }}
-        getOptionLabel={(option: HelpCenterSubcategoryArticlesType | unknown) =>
-          (option as HelpCenterSubcategoryArticlesType).title
-        }
-        isOptionEqualToValue={(option: HelpCenterSubcategoryArticlesType | unknown, value) =>
-          value === (option as HelpCenterSubcategoryArticlesType)
-        }
-        onChange={(event, option: HelpCenterSubcategoryArticlesType | unknown) =>
-          handleRedirection(option as HelpCenterSubcategoryArticlesType)
-        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onChange={(event: SyntheticEvent, value: string | unknown | QueryFilter | null) => setSearchStringQuery(value)}
         onInputChange={(event, value: string) => {
           setValue(value)
           setOpen(!!(event.target as HTMLInputElement).value)
@@ -129,7 +100,7 @@ const SearchHeader = ({ data, allArticles }: Props) => {
           <TextField
             {...params}
             value={value}
-            placeholder='Search a question...'
+            placeholder='Search or filter...'
             onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
             InputProps={{
               ...params.InputProps,
@@ -141,15 +112,18 @@ const SearchHeader = ({ data, allArticles }: Props) => {
             }}
           />
         )}
-        renderOption={(props, option: HelpCenterSubcategoryArticlesType | unknown) => {
+        renderOption={(props, option: string | unknown) => {
           return value.length ? (
             <ListItem
               {...props}
               sx={{ p: '0 !important' }}
-              key={(option as HelpCenterSubcategoryArticlesType).slug}
-              onClick={() => handleRedirection(option as HelpCenterSubcategoryArticlesType)}
+              key={option as string}
+              onClick={() => {
+                setValue(option)
+                setOpen(false)
+              }}
             >
-              <ListItemButton sx={{ py: 1.5 }}>{(option as HelpCenterSubcategoryArticlesType).title}</ListItemButton>
+              <ListItemButton sx={{ py: 1.5 }}>{option as string}</ListItemButton>
             </ListItem>
           ) : null
         }}

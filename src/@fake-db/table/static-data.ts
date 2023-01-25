@@ -6,7 +6,7 @@ export const rows: Array<PropsCBV> = [
     cbv: {
       title: 'dadsadsaasdasdasd',
       cbv_id: 'CBV-23-000001',
-      blockchain: 'Bitcoin',
+      blockchain: 'Polygon',
       severity: 5.5,
       created_at: '15 JAN 23',
       updated_at: '16 JAN 23',
