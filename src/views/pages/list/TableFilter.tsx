@@ -11,9 +11,9 @@ import { PropsCBV } from 'src/context/types'
 import columns from './Columns'
 import { QueryContext } from './QueryContext'
 
-/* const escapeRegExp = (value: string) => {
+const escapeRegExp = (value: string) => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-} */
+}
 
 const TableColumns = () => {
   // ** States
@@ -25,9 +25,6 @@ const TableColumns = () => {
   const [apiData, setApiData] = useState(Object)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchStringQuery, setSearchStringQuery] = useState('cbv')
-
-  // agregar un iff donde, si hay querie params, llame a set querie y los use
-  /* const searchStringQuery = 'cbv' */
 
   useEffect(() => {
     const queryString = searchStringQuery ? searchStringQuery : 'cbv'
@@ -60,9 +57,7 @@ const TableColumns = () => {
     dataFetch()
   }, [searchStringQuery])
 
-  console.log('search text: ', searchText)
-
-  /*   const handleSearch = (searchValue: string) => {
+  const handleSearch = (searchValue: string) => {
     console.log('search value: ', searchValue)
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
@@ -77,7 +72,9 @@ const TableColumns = () => {
     } else {
       setFilteredData([])
     }
-  } */
+  }
+
+  // TODO: work on filter and sort
 
   return (
     <QueryContext.Provider value={{ searchStringQuery, setSearchStringQuery }}>

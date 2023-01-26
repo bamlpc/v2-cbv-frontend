@@ -1,8 +1,10 @@
 //** Types
 import { PropsCBV } from 'src/context/types'
 
+import ReactMarkdown from 'react-markdown'
+
 const Details = ({ data }: { data: PropsCBV }) => {
-  return <>{data.cbv.details}</>
+  return <ReactMarkdown>{data.cbv.details}</ReactMarkdown>
 }
 
 export default Details

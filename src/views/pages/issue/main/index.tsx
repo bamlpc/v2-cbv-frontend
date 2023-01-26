@@ -7,6 +7,8 @@ import InformationOverview from 'src/views/pages/issue/main/InformationOverview'
 //** Types
 import { PropsCBV } from 'src/context/types'
 
+import ReactMarkdown from 'react-markdown'
+
 const MainTab = ({ data }: { data: PropsCBV }) => {
   return data && Object.values(data).length ? (
     <Grid container spacing={6}>
@@ -17,8 +19,7 @@ const MainTab = ({ data }: { data: PropsCBV }) => {
         <Grid container spacing={6}>
           <Grid item xs={12}></Grid>
           <Grid item xs={12}>
-            <h1>{data.cbv.short_description}</h1>
-            <h4>Imaginar props aca abajo, si se me ocurre alguno</h4>
+            <ReactMarkdown>{data.cbv.short_description}</ReactMarkdown>
           </Grid>
         </Grid>
       </Grid>

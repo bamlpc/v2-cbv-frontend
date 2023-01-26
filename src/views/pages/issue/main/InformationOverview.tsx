@@ -4,24 +4,7 @@ import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-
-interface Props {
-  cbv: CBV
-}
-
-type CBV = {
-  title: string
-  short_description: string
-  cbv_id: string
-  blockchain: string
-  version_affected: string
-  severity: string
-  vulnerability_type: string
-  component: string
-  created_at: string
-  updated_at: string
-  credits: string
-}
+import { PropsCBV } from 'src/context/types'
 
 const renderList = (arr: Array<string[]>) => {
   if (arr && arr.length) {
@@ -46,7 +29,7 @@ const renderList = (arr: Array<string[]>) => {
   }
 }
 
-const InformationOverview = (props: Props) => {
+const InformationOverview = (props: PropsCBV) => {
   const leftPanelList = [
     ['Blockchain:', props.cbv.blockchain],
     ['Version affected:', props.cbv.version_affected],

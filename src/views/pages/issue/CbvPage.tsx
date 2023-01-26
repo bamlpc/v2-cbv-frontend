@@ -17,7 +17,6 @@ import MuiTabList, { TabListProps } from '@mui/lab/TabList'
 import CircularProgress from '@mui/material/CircularProgress'
 
 // ** Type Import
-import { UserProfileActiveTab } from 'src/@fake-db/types'
 import { PropsCBV } from 'src/context/types'
 
 // ** Icon Imports
@@ -28,7 +27,7 @@ import Details from 'src/views/pages/issue/details'
 import Main from 'src/views/pages/issue/main'
 import Test from 'src/views/pages/issue/tests'
 import References from 'src/views/pages/issue/references'
-import UserProfileHeader from 'src/views/pages/issue/UserProfileHeader'
+import UserProfileHeader from 'src/views/pages/issue/CbvPageHeader'
 
 const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
   '& .MuiTabs-indicator': {
@@ -48,7 +47,7 @@ const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
   }
 }))
 
-const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab }) => {
+const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: PropsCBV }) => {
   // ** State
   const [activeTab, setActiveTab] = useState<string>(tab)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -62,7 +61,7 @@ const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab })
     setActiveTab(value)
     router
       .push({
-        pathname: `/issue/${value.toLowerCase()}`
+        pathname: `/issue//${cbv}/${value.toLowerCase()}`
       })
       .then(() => setIsLoading(false))
   }
@@ -81,27 +80,7 @@ const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab])
 
-  const propsCBV: PropsCBV = {
-    id: '1122551',
-    cbv: {
-      title: 'Un dicho criollo',
-      short_description: 'cortito como patada de chancho',
-      cbv_id: 'CBV-23-000001',
-      details:
-        'dnbapsidubaspiduasbi0pduasbdioasbdasiodbasioudbasiopdas doasbdpoasjdbasiodbjasiodas dbopasijbdaiopsjdbasiodhabsdas',
-      blockchain: 'Bitcoin',
-      version_affected: '0.5',
-      severity: '5.5',
-      vulnerability_type: 'dadas',
-      component: 'adasda',
-      created_at: '15 JUN 23',
-      updated_at: '18 JUN 23',
-      references: 'none',
-      test: 'No test register, colaborate',
-      credits: '@BMogetta'
-    },
-    timestamp: 4654654
-  }
+  const propsCBV: PropsCBV = data
 
   const tabContentList: { [key: string]: ReactElement } = {
     main: <Main data={propsCBV as PropsCBV} />,
@@ -113,7 +92,7 @@ const UserProfile = ({ tab, data }: { tab: string; data: UserProfileActiveTab })
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
-        {<UserProfileHeader />}
+        {<UserProfileHeader data={propsCBV} />}
       </Grid>
       {activeTab === undefined ? null : (
         <Grid item xs={12}>
