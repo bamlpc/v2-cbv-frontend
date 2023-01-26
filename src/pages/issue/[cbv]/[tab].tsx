@@ -13,6 +13,7 @@ export default function TabPage() {
 
   const [data, setData] = useState(Object)
   const [cbvCode, setCbvCode] = useState<string>('CBV-23-00002')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [validCbvCode, setValidCbvCode] = useState<boolean>(true)
 
   /* function isValidCBVCode() {
@@ -59,7 +60,7 @@ export default function TabPage() {
       setData(data)
     }
     dataFetch()
-  }, [cbvCode])
+  }, [cbv, cbvCode])
 
   return <>{data.data && validCbvCode ? <UserProfile cbv={cbv} tab={tab} data={data.data.find_by_cbv_code} /> : null}</>
 }

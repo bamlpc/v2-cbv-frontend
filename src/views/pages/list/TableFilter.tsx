@@ -56,7 +56,7 @@ const TableColumns = () => {
     }
     dataFetch()
   }, [searchStringQuery])
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSearch = (searchValue: string) => {
     console.log('search value: ', searchValue)
     setSearchText(searchValue)
