@@ -25,10 +25,10 @@ interface SeverityIssuesPieProps {
 }
 
 const customColors = {
-  low: '#e3f658',
-  medium: '#fdcc8a',
-  high: '#fc8d59',
-  critical: '#d7301f'
+  low: '#33CC33',
+  medium: '#FF9900',
+  high: '#FF3300',
+  critical: '#CC3300'
 }
 
 const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {

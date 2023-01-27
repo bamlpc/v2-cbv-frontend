@@ -13,49 +13,57 @@ import TableContainer from '@mui/material/TableContainer'
 // ** Custom Components Imports
 import OptionsMenu from 'src/@core/components/option-menu'
 
-interface DataType {
+// ** React
+import { useEffect, useState } from 'react'
+
+interface CBV {
   cbv_id: string
   title: string
   blockchain: string
   severity: string
+  score: string
+  short_description: string
+  recommendation: string
 }
-
-//TODO: CREATE A FUNCTION THAT RETURNS THIS
-const data: DataType[] = [
-  {
-    cbv_id: 'CBV-23-000001',
-    title: 'Missing check for duplicate inputs',
-    blockchain: 'Bitcoin',
-    severity: '8'
-  },
-  {
-    cbv_id: 'CBV-23-000001',
-    title: 'Missing check for duplicate inputs',
-    blockchain: 'Bitcoin',
-    severity: '8'
-  },
-  {
-    cbv_id: 'CBV-23-000001',
-    title: 'Missing check for duplicate inputs',
-    blockchain: 'Bitcoin',
-    severity: '8'
-  },
-  {
-    cbv_id: 'CBV-23-000001',
-    title: 'Missing check for duplicate inputs',
-    blockchain: 'Bitcoin',
-    severity: '8'
-  },
-  {
-    cbv_id: 'CBV-23-000001',
-    title: 'Missing check for duplicate inputs',
-    blockchain: 'Bitcoin',
-    severity: '8'
-  }
-]
-
-// TODO: add a field to the database to store the current time at the moment to be store so its easy to retrieve and sort
+interface DataType {
+  _id: string
+  cbv: CBV
+}
 const LastAddedIssues = () => {
+  const [searchLastTen, setSearchLastTen] = useState<DataType[]>([])
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      const _data = await (
+        await fetch('https://cbv-api.deno.dev/graphql', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `
+           query{
+            find_by_latest(number: "10" ){
+               _id
+               cbv{
+                 cbv_id
+                 title
+                 blockchain
+                 short_description
+                 severity
+                 score
+                 recommendation
+               }
+             }
+           }`
+          })
+        })
+      ).json()
+      console.log('setSearchLastTen', _data.data.find_by_latest)
+      setSearchLastTen(_data.data.find_by_latest)
+    }
+    dataFetch()
+  }, [])
+
   return (
     <Card>
       <CardHeader
@@ -76,39 +84,41 @@ const LastAddedIssues = () => {
         <TableContainer>
           <Table>
             <TableBody>
-              {data.map((row: DataType) => {
-                return (
-                  <TableRow
-                    key={row.title}
-                    sx={{
-                      '&:last-of-type td': { border: 0, pb: 0 },
-                      '&:first-of-type td': { borderTop: theme => `1px solid ${theme.palette.divider}` },
-                      '& .MuiTableCell-root': {
-                        '&:last-of-type': { pr: 0 },
-                        '&:first-of-type': { pl: 0 },
-                        py: theme => `${theme.spacing(2.75)} !important`
-                      }
-                    }}
-                  >
-                    <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv_id}</Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                        <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
-                          {row.blockchain}
-                        </Typography>
-                        {row.severity}
-                      </Box>
-                    </TableCell>
-                    <TableCell align='right'>
-                      <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.title}</Typography>
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
+              {searchLastTen.length !== 0
+                ? searchLastTen.map((row: DataType) => {
+                    return (
+                      <TableRow
+                        key={row._id}
+                        sx={{
+                          '&:last-of-type td': { border: 0, pb: 0 },
+                          '&:first-of-type td': { borderTop: theme => `1px solid ${theme.palette.divider}` },
+                          '& .MuiTableCell-root': {
+                            '&:last-of-type': { pr: 0 },
+                            '&:first-of-type': { pl: 0 },
+                            py: theme => `${theme.spacing(2.75)} !important`
+                          }
+                        }}
+                      >
+                        <TableCell>
+                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.cbv_id}</Typography>
+                          </Box>
+                        </TableCell>
+                        <TableCell>
+                          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
+                              {row.cbv.blockchain}
+                            </Typography>
+                            {row.cbv.severity}
+                          </Box>
+                        </TableCell>
+                        <TableCell align='right'>
+                          <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.cbv.title}</Typography>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })
+                : null}
             </TableBody>
           </Table>
         </TableContainer>

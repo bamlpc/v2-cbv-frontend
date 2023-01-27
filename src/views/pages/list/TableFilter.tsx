@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react'
 //
 import Card from '@mui/material/Card'
 import { DataGrid } from '@mui/x-data-grid'
+import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
 
 //
 import SearchHeader from 'src/views/pages/list/SearchHeader'
@@ -22,7 +24,7 @@ const TableColumns = () => {
   const [searchText, setSearchText] = useState<string>('cbv')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filteredData, setFilteredData] = useState<PropsCBV[]>([])
-  const [apiData, setApiData] = useState(Object)
+  const [apiData, setApiData] = useState<PropsCBV[]>([])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchStringQuery, setSearchStringQuery] = useState('cbv')
 
@@ -55,6 +57,7 @@ const TableColumns = () => {
           })
         })
       ).json()
+      console.log(apiData)
       setApiData(_data.data.find_by_search_string)
     }
     dataFetch()
@@ -83,15 +86,21 @@ const TableColumns = () => {
     <QueryContext.Provider value={{ searchStringQuery, setSearchStringQuery }}>
       <SearchHeader />
       <Card>
-        <DataGrid
-          autoHeight
-          columns={columns()}
-          pageSize={pageSize}
-          rowsPerPageOptions={[7, 10, 25, 50]}
-          rows={filteredData.length ? filteredData : apiData}
-          getRowId={apiData => apiData._id}
-          onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-        ></DataGrid>
+        {apiData.length ? (
+          <DataGrid
+            autoHeight
+            columns={columns()}
+            pageSize={pageSize}
+            rowsPerPageOptions={[7, 10, 25, 50]}
+            rows={filteredData.length ? filteredData : apiData}
+            getRowId={apiData => apiData._id}
+            onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+          ></DataGrid>
+        ) : (
+          <Box sx={{ width: '100%' }}>
+            <LinearProgress />
+          </Box>
+        )}
       </Card>
     </QueryContext.Provider>
   )

@@ -16,6 +16,13 @@ function trimShortDescription(description: string): string {
   }
 }
 
+const customColors = {
+  Low: '#33CC33',
+  Medium: '#FF9900',
+  High: '#FF3300',
+  Critical: '#CC3300'
+} as Record<string, string>
+
 const columns = (): GridColumns => {
   return [
     {
@@ -76,8 +83,11 @@ const columns = (): GridColumns => {
         <NextLink href={`/issue/${params.row.cbv.cbv_id}/main`} passHref>
           <MUILink variant='body2'>
             <Tooltip title={trimShortDescription(params.row.cbv.recommendation)}>
-              <Typography variant='body2' sx={{ color: 'text.primary' }}>
-                {params.row.cbv.severity}
+              <Typography
+                variant='body2'
+                sx={{ color: params.row.cbv.severity ? customColors[params.row.cbv.severity] : 'text.primary' }}
+              >
+                {`${params.row.cbv.severity} - ${params.row.cbv.score}`}
               </Typography>
             </Tooltip>
           </MUILink>
