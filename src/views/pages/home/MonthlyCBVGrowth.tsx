@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import { Skeleton } from '@mui/material'
 
 // ** Third Party Imports
 import { ApexOptions } from 'apexcharts'
@@ -99,26 +100,32 @@ const MonthlyCBVGrowth = (props: GraphProps) => {
   }
 
   return (
-    <Card>
-      <CardHeader
-        title='Monthly CBV report'
-        action={
-          <OptionsMenu
-            options={['Refresh', 'Edit', 'Update']}
-            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+    <>
+      {false ? (
+        <Card>
+          <CardHeader
+            title='Monthly CBV report'
+            action={
+              <OptionsMenu
+                options={['Refresh', 'Edit', 'Update']}
+                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+              />
+            }
           />
-        }
-      />
-      <CardContent>
-        <ReactApexcharts
-          type='area'
-          height={262}
-          options={options}
-          series={[{ name: 'Traffic Rate', data: props.data }]}
-        />
-        <Typography variant='body2'>Report of new CBV added by month</Typography>
-      </CardContent>
-    </Card>
+          <CardContent>
+            <ReactApexcharts
+              type='area'
+              height={262}
+              options={options}
+              series={[{ name: 'Traffic Rate', data: props.data }]}
+            />
+            <Typography variant='body2'>Report of new CBV added by month</Typography>
+          </CardContent>
+        </Card>
+      ) : (
+        <Skeleton variant='rectangular' animation='pulse' height='470px' />
+      )}
+    </>
   )
 }
 

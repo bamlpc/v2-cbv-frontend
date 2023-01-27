@@ -4,6 +4,7 @@ import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import { Skeleton } from '@mui/material'
 
 // ** Third Party Imports
 import { ApexOptions } from 'apexcharts'
@@ -77,19 +78,25 @@ const TotalGrowth = (props: pieDataProps) => {
   }
 
   return (
-    <Card>
-      <CardContent>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Typography variant='h6' sx={{ mr: 1.5 }}>
-            {props.title}
-          </Typography>
-          <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
-            {props.subtitle}
-          </Typography>
-        </Box>
-        <ReactApexcharts type='donut' height={165} options={options} series={pieData} />
-      </CardContent>
-    </Card>
+    <>
+      {false ? (
+        <Card>
+          <CardContent>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Typography variant='h6' sx={{ mr: 1.5 }}>
+                {props.title}
+              </Typography>
+              <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
+                {props.subtitle}
+              </Typography>
+            </Box>
+            <ReactApexcharts type='donut' height={165} options={options} series={pieData} />
+          </CardContent>
+        </Card>
+      ) : (
+        <Skeleton variant='rectangular' animation='pulse' height='200px' />
+      )}
+    </>
   )
 }
 

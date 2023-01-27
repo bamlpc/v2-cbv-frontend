@@ -12,12 +12,11 @@ const FooterContent = () => {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
       <Typography sx={{ mr: 2 }}>
-        {`© ${new Date().getFullYear()}, Made `}
-        {` for `}
+        {`© ${new Date().getFullYear()} `}
         <Link target='_blank' href='https://hacken.io/'>
           Hacken
         </Link>
-        {' by '}
+        {'. Made by '}
         <Link target='_blank' href='https://github.com/BMogetta'>
           Bruno Mogetta
         </Link>

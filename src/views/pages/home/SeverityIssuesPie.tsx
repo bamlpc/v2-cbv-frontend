@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import { Skeleton } from '@mui/material'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -100,59 +101,67 @@ const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {
   }
 
   return (
-    <Card>
-      <CardHeader
-        title='Issus by Severity'
-        action={
-          <OptionsMenu
-            options={['Last 28 Days', 'Last Month', 'Last Year']}
-            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+    <>
+      {false ? (
+        <Card>
+          <CardHeader
+            title='Issus by Severity'
+            action={
+              <OptionsMenu
+                options={['Last 28 Days', 'Last Month', 'Last Year']}
+                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+              />
+            }
           />
-        }
-      />
-      <CardContent>
-        <ReactApexcharts type='donut' height={257} options={options} series={props.data} />
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: customColors.low } }}>
-            <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>Low</Typography>
-          </Box>
-          <Box
-            sx={{
-              mx: 3,
-              display: 'flex',
-              alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(customColors.medium, 1) }
-            }}
-          >
-            <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>Medium</Typography>
-          </Box>
-          <Box
-            sx={{
-              mx: 3,
-              display: 'flex',
-              alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(customColors.high, 1) }
-            }}
-          >
-            <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>High</Typography>
-          </Box>
-          <Box
-            sx={{
-              mx: 3,
-              display: 'flex',
-              alignItems: 'center',
-              '& svg': { mr: 1.25, color: hexToRGBA(customColors.critical, 1) }
-            }}
-          >
-            <Icon icon='mdi:circle' fontSize='0.75rem' />
-            <Typography variant='body2'>Critical</Typography>
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
+          <CardContent>
+            <ReactApexcharts type='donut' height={257} options={options} series={props.data} />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+              <Box
+                sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: customColors.low } }}
+              >
+                <Icon icon='mdi:circle' fontSize='0.75rem' />
+                <Typography variant='body2'>Low</Typography>
+              </Box>
+              <Box
+                sx={{
+                  mx: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '& svg': { mr: 1.25, color: hexToRGBA(customColors.medium, 1) }
+                }}
+              >
+                <Icon icon='mdi:circle' fontSize='0.75rem' />
+                <Typography variant='body2'>Medium</Typography>
+              </Box>
+              <Box
+                sx={{
+                  mx: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '& svg': { mr: 1.25, color: hexToRGBA(customColors.high, 1) }
+                }}
+              >
+                <Icon icon='mdi:circle' fontSize='0.75rem' />
+                <Typography variant='body2'>High</Typography>
+              </Box>
+              <Box
+                sx={{
+                  mx: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '& svg': { mr: 1.25, color: hexToRGBA(customColors.critical, 1) }
+                }}
+              >
+                <Icon icon='mdi:circle' fontSize='0.75rem' />
+                <Typography variant='body2'>Critical</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      ) : (
+        <Skeleton variant='rectangular' animation='pulse' height='470px' />
+      )}
+    </>
   )
 }
 

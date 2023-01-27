@@ -7,10 +7,7 @@ import Icon from 'src/@core/components/icon'
 // ** Styled Component Import
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 
-// ** Custom Component Import
-import CardStatisticsVertical from 'src/@core/components/card-statistics/card-stats-vertical'
-
-// ** Demo Components Imports
+// **  Components Imports
 import TopContributorAward from 'src/views/pages/home/TopContributorAward'
 import TotalGrowth from 'src/views/pages/home/SmallPieChart'
 import MonthlyCBVGrowth from 'src/views/pages/home/MonthlyCBVGrowth'
@@ -18,6 +15,7 @@ import LastSixMonthIssues from 'src/views/pages/home/LastSixMonthIssues'
 import SeverityIssuesPie from 'src/views/pages/home/SeverityIssuesPie'
 import ContributorsRanking from 'src/views/pages/home/ContributorsRanking'
 import LastAddedIssues from 'src/views/pages/home/LastAddedIssues'
+import SmallStatisticsCards from 'src/views/pages/home/SmallStatisticsCards'
 
 const Home = () => {
   return (
@@ -25,22 +23,24 @@ const Home = () => {
       <ApexChartWrapper>
         <Grid container spacing={6} className='match-height'>
           <Grid item xs={6} sm={3} md={2}>
-            <CardStatisticsVertical
+            <SmallStatisticsCards
               stats='New Issues'
               color='primary'
               trendNumber='+20'
               title='Total'
               chipText='Last Month'
+              type='total_new_issues'
               icon={<Icon icon='fluent-mdl2:issue-tracking' />} // TODO: revisar icono para mostrar
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
-            <CardStatisticsVertical
+            <SmallStatisticsCards
               stats='Most Issues'
               color='primary'
               trendNumber='+4'
               title='Bitcoin'
               chipText='Last Month'
+              type='blockchain_with_most_new_issues'
               icon={<Icon icon='eos-icons:blockchain' />} // TODO: revisar icono para mostrar
             />
           </Grid>

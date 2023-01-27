@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
+import { Skeleton } from '@mui/material'
 
 // ** Third Party Imports
 import { ApexOptions } from 'apexcharts'
@@ -132,23 +133,29 @@ const LastSixMonthIssues = (props: Record<string, number[]>) => {
   }
 
   return (
-    <Card>
-      <CardHeader
-        title='Issues added in the last 6 months'
-        action={
-          <OptionsMenu
-            options={['Refresh', 'Update', 'Share']}
-            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+    <>
+      {false ? (
+        <Card>
+          <CardHeader
+            title='Issues added in the last 6 months'
+            action={
+              <OptionsMenu
+                options={['Refresh', 'Update', 'Share']}
+                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+              />
+            }
           />
-        }
-      />
-      <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        <ReactApexcharts type='line' height={208} series={series} options={options} />
-        <Button fullWidth variant='contained'>
-          Details
-        </Button>
-      </CardContent>
-    </Card>
+          <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
+            <ReactApexcharts type='line' height={208} series={series} options={options} />
+            <Button fullWidth variant='contained'>
+              Details
+            </Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <Skeleton variant='rectangular' animation='pulse' height='470px' />
+      )}
+    </>
   )
 }
 

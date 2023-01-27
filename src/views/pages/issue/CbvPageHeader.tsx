@@ -11,6 +11,8 @@ import Icon from 'src/@core/components/icon'
 // ** Types
 import { PropsCBV } from 'src/context/types'
 
+import ShareButton from './ShareButton'
+
 const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
   const designationIcon = 'mdi:briefcase-outline'
 
@@ -18,6 +20,7 @@ const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
 
   return (
     <>
+      <ShareButton />
       {data.cbv ? (
         <Card
           sx={{
