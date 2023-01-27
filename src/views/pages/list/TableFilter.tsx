@@ -43,9 +43,12 @@ const TableColumns = () => {
                  cbv_id
                  title
                  blockchain
+                 short_description
                  severity
+                 recommendation
                  created_at
                  updated_at
+                 credits
                }
              }
            }`

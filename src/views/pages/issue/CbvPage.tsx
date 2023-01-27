@@ -23,7 +23,6 @@ import { PropsCBV } from 'src/context/types'
 import Icon from 'src/@core/components/icon'
 
 // ** Demo Components
-import Details from 'src/views/pages/issue/details'
 import Main from 'src/views/pages/issue/main'
 import Test from 'src/views/pages/issue/tests'
 import References from 'src/views/pages/issue/references'
@@ -84,7 +83,6 @@ const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: Props
 
   const tabContentList: { [key: string]: ReactElement } = {
     main: <Main data={propsCBV as PropsCBV} />,
-    details: <Details data={propsCBV as PropsCBV} />,
     tests: <Test data={propsCBV as PropsCBV} />,
     references: <References data={propsCBV as PropsCBV} />
   }
@@ -106,15 +104,6 @@ const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: Props
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
                         <Icon icon='mdi:account-outline' />
                         {!hideText && 'CBV'}
-                      </Box>
-                    }
-                  />
-                  <Tab
-                    value='details'
-                    label={
-                      <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                        <Icon icon='mdi:account-multiple-outline' />
-                        {!hideText && 'Details'}
                       </Box>
                     }
                   />

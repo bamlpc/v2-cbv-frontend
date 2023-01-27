@@ -2,7 +2,7 @@
 import Grid from '@mui/material/Grid'
 
 // ** Demo Components
-import InformationOverview from 'src/views/pages/issue/main/InformationOverview'
+import InformationOverview from 'src/views/pages/issue/InformationOverview'
 
 //** Types
 import { PropsCBV } from 'src/context/types'
@@ -18,7 +18,10 @@ const MainTab = ({ data }: { data: PropsCBV }) => {
       <Grid item xl={9} md={8} xs={12}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <ReactMarkdown>{data.cbv.short_description}</ReactMarkdown>
+            <ReactMarkdown>{data.cbv.details}</ReactMarkdown>
+          </Grid>
+          <Grid item xs={12}>
+            <ReactMarkdown>{data.cbv.recommendation}</ReactMarkdown>
           </Grid>
         </Grid>
       </Grid>
