@@ -29,6 +29,4 @@ const MainTab = ({ data }: { data: PropsCBV }) => {
   ) : null
 }
 
-MainTab.authGuard = false
-
 export default MainTab

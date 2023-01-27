@@ -8,6 +8,4 @@ const Github = () => {
   )
 }
 
-Github.authGuard = false
-
 export default Github

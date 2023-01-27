@@ -14,6 +14,4 @@ const DataGrid = () => {
   )
 }
 
-DataGrid.authGuard = false
-
 export default DataGrid

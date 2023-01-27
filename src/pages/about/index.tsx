@@ -8,6 +8,4 @@ const About = () => {
   )
 }
 
-About.authGuard = false
-
 export default About

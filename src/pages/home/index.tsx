@@ -84,6 +84,5 @@ const Home = () => {
     </>
   )
 }
-Home.authGuard = false
 
 export default Home

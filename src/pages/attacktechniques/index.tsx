@@ -54,6 +54,4 @@ const AttackTechniques = () => {
   )
 }
 
-AttackTechniques.authGuard = false
-
 export default AttackTechniques

@@ -8,6 +8,4 @@ const DataFlowDiagram = () => {
   )
 }
 
-DataFlowDiagram.authGuard = false
-
 export default DataFlowDiagram

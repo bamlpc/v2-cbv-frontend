@@ -7,7 +7,6 @@ import { Settings } from 'src/@core/context/settingsContext'
 // ** Components
 import Autocomplete from 'src/layouts/components/Autocomplete'
 import ModeToggler from 'src/@core/layouts/components/shared-components/ModeToggler'
-import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 
 interface Props {
   hidden: boolean
@@ -22,7 +21,6 @@ const AppBarContent = (props: Props) => {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Autocomplete hidden={hidden} settings={settings} />
       <ModeToggler settings={settings} saveSettings={saveSettings} />
-      <UserDropdown settings={settings} />
     </Box>
   )
 }

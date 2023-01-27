@@ -104,6 +104,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.authGuard = false
-
 export default Documentation
