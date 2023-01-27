@@ -35,16 +35,16 @@ const Test = ({ data }: { data: PropsCBV }) => {
         <Grid item xl={3} md={4} xs={12} mr={-14}>
           <InformationOverview cbv={data.cbv} id={''} timestamp={0} />
         </Grid>
-        <Grid item xs={8} columns={12}>
-          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'text.secondary' } }}>
-            <Typography sx={{ color: 'text.secondary', fontWeight: 600 }}>
+        <Grid item xs={8} columns={12} sx={{ display: 'inline-table' }}>
+          <Box sx={{ display: 'inline-table', alignItems: 'center', '& svg': { color: 'text.secondary' } }}>
+            <Typography sx={{ color: 'text.secondary', fontWeight: 600, mt: 4 }}>
               There are no test for this vulnerability yet.
             </Typography>
-            <Typography sx={{ color: 'text.secondary', fontWeight: 600 }}>
+            <Typography sx={{ color: 'text.secondary', fontWeight: 600, mt: 4 }}>
               Please consider to colaborate with us reporting a test
             </Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: 4 }}>
             <Button variant='contained' startIcon={<Icon icon='mdi:account-check-outline' fontSize={20} />}>
               Summit tests
             </Button>

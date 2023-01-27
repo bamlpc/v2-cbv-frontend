@@ -8,6 +8,7 @@ export const rows: Array<PropsCBV> = [
       cbv_id: 'CBV-23-000001',
       blockchain: 'Polygon',
       severity: '5.5',
+      score: '',
       created_at: '15 JAN 23',
       updated_at: '16 JAN 23',
       credits: 'BMogetta',
@@ -39,6 +40,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -60,6 +62,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -81,6 +84,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -102,6 +106,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -123,6 +128,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -144,6 +150,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -165,6 +172,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -186,6 +194,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -207,6 +216,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -228,6 +238,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -249,6 +260,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -270,6 +282,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513
@@ -291,6 +304,7 @@ export const rows: Array<PropsCBV> = [
       component: '',
       version_affected: '',
       references: '',
+      score: '',
       vulnerability_type: ''
     },
     timestamp: 246546513

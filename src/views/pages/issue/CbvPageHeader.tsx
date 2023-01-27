@@ -12,11 +12,10 @@ import Icon from 'src/@core/components/icon'
 import { PropsCBV } from 'src/context/types'
 
 import ShareButton from './ShareButton'
+import RadialGauge from './RadialGauge'
 
 const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
   const designationIcon = 'mdi:briefcase-outline'
-
-  /* theme => `url(/images/pages/pages-header-bg-${theme.palette.mode}.png)` */
 
   return (
     <>
@@ -48,6 +47,20 @@ const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
                 justifyContent: ['center', 'space-between']
               }}
             >
+              <Box
+                sx={{
+                  display: 'inline-table',
+                  flexWrap: 'wrap',
+                  justifyContent: ['center', 'flex-start']
+                }}
+              >
+                <Typography variant='h5' sx={{ ml: 2, mb: 4, fontSize: '1rem' }}>
+                  New information?
+                </Typography>
+                <Button variant='contained' startIcon={<Icon icon='mdi:account-check-outline' fontSize={20} />}>
+                  Update this issue
+                </Button>
+              </Box>
               <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>
                 <Typography variant='h5' sx={{ mb: 4, fontSize: '1.375rem' }}>
                   {data.cbv.title}
@@ -79,9 +92,7 @@ const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
                   </Box>
                 </Box>
               </Box>
-              <Button variant='contained' startIcon={<Icon icon='mdi:account-check-outline' fontSize={20} />}>
-                Got new information?
-              </Button>
+              <RadialGauge severity={data.cbv.severity} score={data.cbv.score} />
             </Box>
           </CardContent>
         </Card>

@@ -28,9 +28,9 @@ function ShareButton() {
 
   return (
     <SpeedDial
-      direction='up'
+      direction='down'
       ariaLabel='SpeedDial controlled open example'
-      sx={{ position: 'absolute', bottom: 16, right: 16 }}
+      sx={{ position: 'absolute', trop: 16, right: 16 }}
       icon={<ShareIcon />}
       onClose={handleClose}
       onOpen={handleOpen}

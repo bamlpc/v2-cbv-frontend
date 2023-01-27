@@ -15,6 +15,7 @@ export type CBV = {
   recommendation: string
   version_affected: string
   severity: string
+  score: string
   vulnerability_type: string
   component: string
   created_at: string
