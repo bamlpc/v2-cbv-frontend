@@ -102,7 +102,7 @@ const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: Props
                     value='main'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                        <Icon icon='mdi:account-outline' />
+                        <Icon icon='ri:profile-line' />
                         {!hideText && 'CBV'}
                       </Box>
                     }
@@ -111,7 +111,7 @@ const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: Props
                     value='tests'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                        <Icon icon='mdi:view-grid-outline' />
+                        <Icon icon='fluent-emoji-high-contrast:test-tube' />
                         {!hideText && 'Test'}
                       </Box>
                     }
@@ -120,7 +120,7 @@ const UserProfile = ({ cbv, tab, data }: { cbv: string; tab: string; data: Props
                     value='references'
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                        <Icon icon='mdi:link-variant' />
+                        <Icon icon='codicon:references' />
                         {!hideText && 'references'}
                       </Box>
                     }

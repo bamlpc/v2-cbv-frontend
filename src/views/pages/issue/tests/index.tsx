@@ -45,7 +45,11 @@ const Test = ({ data }: { data: PropsCBV }) => {
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: 4 }}>
-            <Button variant='contained' startIcon={<Icon icon='mdi:account-check-outline' fontSize={20} />}>
+            <Button
+              variant='contained'
+              href='https://github.com/bamlpc/common-blockchain-vulnerabilities/issues/new/choose'
+              startIcon={<Icon icon='jam:write' fontSize={20} />}
+            >
               Summit tests
             </Button>
           </Box>

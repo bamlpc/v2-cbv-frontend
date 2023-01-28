@@ -32,26 +32,12 @@ const RadialGauge = (data: Severity) => {
   // ** Hook
   const theme = useTheme()
 
-  const score = data.score
-  const gaugeAdvance = Number(score) * 10 || 39
+  const score = data.score || '3.9'
+  const gaugeAdvance = Number(score) * 10
 
   const options: ApexOptions = {
-    stroke: { lineCap: 'round' },
-    labels: ['Severity'],
-    legend: {
-      show: true,
-      position: 'bottom',
-      labels: {
-        colors: theme.palette.text.secondary
-      },
-      markers: {
-        offsetX: -3
-      },
-      itemMargin: {
-        vertical: 3,
-        horizontal: 10
-      }
-    },
+    stroke: { lineCap: 'butt' },
+    labels: [data.severity],
     colors: [getColor(data.severity)],
     plotOptions: {
       radialBar: {
@@ -64,19 +50,18 @@ const RadialGauge = (data: Severity) => {
         },
         dataLabels: {
           name: {
-            fontSize: '2rem'
+            fontSize: '2rem',
+            show: true
           },
           value: {
             fontSize: '1rem',
-            color: theme.palette.text.secondary
+            color: getColor(data.severity),
+            show: true,
+            formatter: () => {
+              return data.severity
+            }
           }
         }
-      }
-    },
-    grid: {
-      padding: {
-        top: -35,
-        bottom: -30
       }
     }
   }

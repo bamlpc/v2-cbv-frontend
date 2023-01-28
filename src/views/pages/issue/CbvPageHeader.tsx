@@ -15,8 +15,6 @@ import ShareButton from './ShareButton'
 import RadialGauge from './RadialGauge'
 
 const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
-  const designationIcon = 'mdi:briefcase-outline'
-
   return (
     <>
       <ShareButton />
@@ -57,7 +55,11 @@ const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
                 <Typography variant='h5' sx={{ ml: 2, mb: 4, fontSize: '1rem' }}>
                   New information?
                 </Typography>
-                <Button variant='contained' startIcon={<Icon icon='mdi:account-check-outline' fontSize={20} />}>
+                <Button
+                  variant='contained'
+                  href='https://github.com/bamlpc/common-blockchain-vulnerabilities/issues/new/choose'
+                  startIcon={<Icon icon='jam:write' fontSize={20} />}
+                >
                   Update this issue
                 </Button>
               </Box>
@@ -75,24 +77,26 @@ const UserProfileHeader = ({ data }: { data: PropsCBV }) => {
                   <Box
                     sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: 'text.secondary' } }}
                   >
-                    <Icon icon={designationIcon} />
+                    <Icon icon='mdi:paper-outline' />
                     <Typography sx={{ color: 'text.secondary', fontWeight: 600 }}>{data.cbv.cbv_id}</Typography>
                   </Box>
                   <Box
                     sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: 'text.secondary' } }}
                   >
-                    <Icon icon='mdi:map-marker-outline' />
+                    <Icon icon='eos-icons:blockchain' />
                     <Typography sx={{ color: 'text.secondary', fontWeight: 600 }}>{data.cbv.blockchain}</Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: 'text.secondary' } }}>
-                    <Icon icon='mdi:calendar-blank-outline' />
+                    <Icon icon='mdi:clipboard-text-date-outline' />
                     <Typography sx={{ color: 'text.secondary', fontWeight: 600 }}>
                       Updated {data.cbv.updated_at ? data.cbv.updated_at : data.cbv.created_at}
                     </Typography>
                   </Box>
                 </Box>
               </Box>
-              <RadialGauge severity={data.cbv.severity} score={data.cbv.score} />
+              <Box sx={{ transform: 'scale(0.9)', mb: '-35px' }}>
+                <RadialGauge severity={data.cbv.severity} score={data.cbv.score} />
+              </Box>
             </Box>
           </CardContent>
         </Card>
