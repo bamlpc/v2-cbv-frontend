@@ -134,7 +134,7 @@ const LastSixMonthIssues = (props: Record<string, number[]>) => {
 
   return (
     <>
-      {false ? (
+      {true ? (
         <Card>
           <CardHeader
             title='Issues added in the last 6 months'

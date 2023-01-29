@@ -139,7 +139,7 @@ const ContributorsRanking = () => {
 
   return (
     <>
-      {false ? (
+      {true ? (
         <Card>
           <CardHeader
             title='TOP CONTRIBUTORS'

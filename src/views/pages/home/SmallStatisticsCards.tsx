@@ -15,12 +15,14 @@ type SmallCardProps = {
   chipText: string
   icon: ReactNode
   type: string
+  data: Record<string, number>
 }
 
+//TODO: grab trend number and title from props.data
 const SmallStatisticsCards = (props: SmallCardProps) => {
   return (
     <>
-      {false ? (
+      {true ? (
         <CardStatisticsVertical
           stats={props.stats}
           color={props.color}

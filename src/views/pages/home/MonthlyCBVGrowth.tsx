@@ -101,7 +101,7 @@ const MonthlyCBVGrowth = (props: GraphProps) => {
 
   return (
     <>
-      {false ? (
+      {true ? (
         <Card>
           <CardHeader
             title='Monthly CBV report'

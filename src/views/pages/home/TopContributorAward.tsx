@@ -27,7 +27,7 @@ interface TopContributorProps {
 const TopContributorAward = (props: TopContributorProps) => {
   return (
     <>
-      {false ? (
+      {true ? (
         <Card sx={{ position: 'relative' }}>
           <CardContent>
             <Typography variant='h6'>
