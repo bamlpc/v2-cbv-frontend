@@ -11,10 +11,10 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 const customColors = {
-  Low: '#33CC33',
-  Medium: '#FF9900',
-  High: '#FF3300',
-  Critical: '#CC3300'
+  Low: '#4F81BD',
+  Medium: '#5A9C47',
+  High: '#F2D455',
+  Critical: '#FF3A3A'
 } as Record<string, string>
 
 type Severity = {
