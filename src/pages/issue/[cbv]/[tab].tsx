@@ -40,6 +40,7 @@ export default function TabPage() {
                 short_description
                 cbv_id
                 severity
+                score
                 created_at
                 updated_at
                 component

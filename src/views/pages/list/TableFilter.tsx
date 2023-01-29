@@ -47,6 +47,7 @@ const TableColumns = () => {
                  blockchain
                  short_description
                  severity
+                 score
                  recommendation
                  created_at
                  updated_at

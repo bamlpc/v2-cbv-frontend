@@ -32,12 +32,12 @@ const RadialGauge = (data: Severity) => {
   // ** Hook
   const theme = useTheme()
 
-  const score = data.score || '3.9'
+  const score = data.score
   const gaugeAdvance = Number(score) * 10
 
   const options: ApexOptions = {
     stroke: { lineCap: 'butt' },
-    labels: [data.severity],
+    labels: [data.score],
     colors: [getColor(data.severity)],
     plotOptions: {
       radialBar: {
