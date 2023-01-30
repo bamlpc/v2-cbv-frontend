@@ -24,20 +24,6 @@ const navigation = (): VerticalNavItemsType => {
       title: 'Documentation',
       path: '/documentation',
       icon: 'mdi:book-open-blank-variant'
-    },
-    {
-      title: 'Github',
-      path: 'https://github.com/bamlpc/common-blockchain-vulnerabilities',
-      externalLink: true,
-      openInNewTab: true,
-      icon: 'mdi:github'
-    },
-    {
-      title: 'API',
-      path: 'https://cbv-api.deno.dev/',
-      externalLink: true,
-      openInNewTab: true,
-      icon: 'mdi:graphql'
     }
   ]
 }

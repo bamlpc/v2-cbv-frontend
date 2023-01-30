@@ -4,6 +4,7 @@ import Link from '@mui/material/Link'
 import { Theme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { Icon } from '@iconify/react'
 
 const FooterContent = () => {
   // ** Var
@@ -16,18 +17,32 @@ const FooterContent = () => {
         <Link target='_blank' href='https://hacken.io/'>
           Hacken
         </Link>
-        {'. Made by '}
-        <Link target='_blank' href='https://github.com/BMogetta'>
-          Bruno Mogetta
-        </Link>
       </Typography>
       {hidden ? null : (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', '& :not(:last-child)': { mr: 4 } }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', '& :not(:last-child)': { mr: 6 } }}>
+          <Link target='_blank' href='https://github.com/bamlpc/common-blockchain-vulnerabilities'>
+            <Box component='span' sx={{ display: 'flex' }}>
+              <Icon icon='mdi:github' />
+              <Typography sx={{ ml: -5, mt: -1 }}>Github</Typography>
+            </Box>
+          </Link>
+          <Link target='_blank' href='https://cbv-api.deno.dev/'>
+            <Box component='span' sx={{ display: 'flex' }}>
+              <Icon icon='mdi:graphql' />
+              <Typography sx={{ ml: -5, mt: -1 }}>API</Typography>
+            </Box>
+          </Link>
           <Link target='_blank' href='/about'>
-            About
+            <Box component='span' sx={{ display: 'flex' }}>
+              <Icon icon='mdi:information-outline' />
+              <Typography sx={{ ml: -5, mt: -1 }}>About</Typography>
+            </Box>
           </Link>
           <Link target='_blank' href='https://github.com/bamlpc/common-blockchain-vulnerabilities/blob/main/LICENSE'>
-            License
+            <Box component='span' sx={{ display: 'flex' }}>
+              <Icon icon='tabler:license' />
+              <Typography sx={{ ml: -5, mt: -1 }}>License</Typography>
+            </Box>
           </Link>
         </Box>
       )}
@@ -35,4 +50,18 @@ const FooterContent = () => {
   )
 }
 
+/* {
+    title: 'Github',
+    path: 'https://github.com/bamlpc/common-blockchain-vulnerabilities',
+    externalLink: true,
+    openInNewTab: true,
+    icon: 'mdi:github'
+  },
+  {
+    title: 'API',
+    path: 'https://cbv-api.deno.dev/',
+    externalLink: true,
+    openInNewTab: true,
+    icon: 'mdi:graphql'
+  } */
 export default FooterContent
