@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, ChangeEvent, useContext } from 'react'
+import { useState, ChangeEvent } from 'react'
 
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
@@ -11,12 +11,12 @@ import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Au
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 
+//
+import { useRouter } from 'next/router'
+
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import { SyntheticEvent } from 'react-draft-wysiwyg'
-
-//
-import { QueryContext } from './QueryContext'
 
 // Styled Autocomplete component
 const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
@@ -62,10 +62,7 @@ const SearchHeader = () => {
   const [value, setValue] = useState<string | unknown | QueryFilter | null>(null)
   const [open, setOpen] = useState<boolean>(false)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { searchStringQuery, setSearchStringQuery }: any = useContext(QueryContext)
-
-  console.log({ value })
+  const router = useRouter()
 
   return (
     <CardContentNoPadding
@@ -89,7 +86,12 @@ const SearchHeader = () => {
         onClose={() => setOpen(false)}
         sx={{ my: 4, '& + .MuiAutocomplete-popper .MuiAutocomplete-listbox': { maxHeight: 250 } }}
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        onChange={(event: SyntheticEvent, value: string | unknown | QueryFilter | null) => setSearchStringQuery(value)}
+        onChange={(event: SyntheticEvent, value: string | unknown | QueryFilter | null) => {
+          if (typeof value === 'string') {
+            const query = encodeURIComponent(value)
+            router.push(`/list?search=${query}`)
+          }
+        }}
         onInputChange={(event, value: string) => {
           setValue(value)
           setOpen(!!(event.target as HTMLInputElement).value)

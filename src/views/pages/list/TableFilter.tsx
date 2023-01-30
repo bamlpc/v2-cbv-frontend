@@ -14,7 +14,6 @@ import Box from '@mui/material/Box'
 import SearchHeader from 'src/views/pages/list/SearchHeader'
 import { PropsCBV } from 'src/context/types'
 import columns from './Columns'
-import { QueryContext } from './QueryContext'
 
 /* const escapeRegExp = (value: string) => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -29,7 +28,6 @@ const TableColumns = () => {
   /* const [searchText, setSearchText] = useState<string>('cbv') */
   /* const [filteredData, setFilteredData] = useState<PropsCBV[]>([]) */
   const [apiData, setApiData] = useState<PropsCBV[]>([])
-  const [searchStringQuery, setSearchStringQuery] = useState('')
 
   const search = window.location.search
   const [currentSearch, setCurrentSearch] = useState(search)
@@ -95,7 +93,7 @@ const TableColumns = () => {
   // TODO: work on filter and sort
 
   return (
-    <QueryContext.Provider value={{ searchStringQuery, setSearchStringQuery }}>
+    <>
       <SearchHeader />
       <Card>
         {apiData.length ? (
@@ -114,7 +112,7 @@ const TableColumns = () => {
           </Box>
         )}
       </Card>
-    </QueryContext.Provider>
+    </>
   )
 }
 
