@@ -30,6 +30,7 @@ const TopContributorAward = (props: ContributorAward) => {
   const sorted = Object.fromEntries(topContributor)
   const user = Object.keys(sorted) || 'default user'
   const amount = Object.values(sorted)[0] || 'default amount'
+  const link = encodeURIComponent(user[0])
 
   //TODO: contemplate the case of more that 1 person with the same amount of issue reported
   return (
@@ -51,7 +52,7 @@ const TopContributorAward = (props: ContributorAward) => {
         <Typography variant='body2' sx={{ mb: 3.25 }}>
           🤟🏻
         </Typography>
-        <Button size='small' variant='contained'>
+        <Button size='small' variant='contained' href={`/list?search=${link}`}>
           View issues
         </Button>
         <TrophyImg alt='trophy' src='/images/cards/trophy.png' />
