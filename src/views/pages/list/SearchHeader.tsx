@@ -79,7 +79,7 @@ const SearchHeader = () => {
       }}
     >
       <Typography variant='h5' sx={{ fontWeight: 600, fontSize: '1.5rem !important' }}>
-        Common blockchain vulnerability
+        Common Blockchain Vulnerability
       </Typography>
 
       <Autocomplete

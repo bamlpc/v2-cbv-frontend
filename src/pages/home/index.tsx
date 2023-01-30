@@ -22,7 +22,11 @@ import SmallStatisticsCards from 'src/views/pages/home/SmallStatisticsCards'
 import { Skeleton } from '@mui/material'
 
 const Home = () => {
-  const [data, setData] = useState(Object)
+  const [dataSmallChart, setDataSmallChart] = useState(Object)
+  const [dataBigChart, setDataBigChart] = useState(Object)
+  const [dataRanking, setDataRanking] = useState(Object)
+
+  // this month
   useEffect(() => {
     const dataFetch = async () => {
       const _data = await (
@@ -33,7 +37,7 @@ const Home = () => {
           body: JSON.stringify({
             query: `query{
               find_for_home_page(timeframe: {start: 2629800000}) {
-                 contributors
+                contributors
                 severities
                 blockchains
               }
@@ -41,7 +45,55 @@ const Home = () => {
           })
         })
       ).json()
-      setData(_data.data)
+      setDataSmallChart(_data.data.find_for_home_page)
+    }
+    dataFetch()
+  }, [])
+
+  // 6 month
+  const NOW = new Date()
+  const SIX_MONTHS_AGO = NOW.setMonth(NOW.getMonth() - 6)
+  useEffect(() => {
+    const dataFetch = async () => {
+      const _data = await (
+        await fetch('https://cbv-api.deno.dev/graphql', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `query{
+              find_for_home_page(timeframe: {start: ${SIX_MONTHS_AGO}}) {
+                contributors
+                severities
+                blockchains
+              }
+            }`
+          })
+        })
+      ).json()
+      setDataBigChart(_data.data.find_for_home_page)
+    }
+    dataFetch()
+  }, [])
+
+  // ranking
+  useEffect(() => {
+    const dataFetch = async () => {
+      const _data = await (
+        await fetch('https://cbv-api.deno.dev/graphql', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `query{
+              find_for_home_page(timeframe: {start: 438300000}) {
+                contributors
+              }
+            }`
+          })
+        })
+      ).json()
+      setDataRanking(_data.data.find_for_home_page)
     }
     dataFetch()
   }, [])
@@ -52,54 +104,67 @@ const Home = () => {
       <ApexChartWrapper>
         <Grid container spacing={6} className='match-height'>
           <Grid item xs={6} sm={3} md={2}>
-            <SmallStatisticsCards
-              stats='New Issues'
-              color='primary'
-              trendNumber='+20'
-              title='Total'
-              chipText='Last Month'
-              type='total_new_issues'
-              data={data}
-              icon={<Icon icon='fluent-mdl2:issue-tracking' />} // TODO: revisar icono para mostrar
-            />
-          </Grid>
-          <Grid item xs={6} sm={3} md={2}>
-            <SmallStatisticsCards
-              stats='Most Issues'
-              color='primary'
-              trendNumber='+4'
-              title='Bitcoin'
-              chipText='Last Month'
-              type='blockchain_with_most_new_issues'
-              data={data.find_for_home_page}
-              icon={<Icon icon='eos-icons:blockchain' />} // TODO: revisar icono para mostrar
-            />
-          </Grid>
-          <Grid item xs={6} sm={3} md={2}>
-            {data.find_for_home_page ? (
-              <TotalGrowth // TODO: revisar colores
-                title={'Total New CBV'}
-                subtitle={'by blockchain'}
-                data={data.find_for_home_page}
+            {dataSmallChart.blockchains ? (
+              <SmallStatisticsCards
+                stats='Total New Issues'
+                color='primary'
+                chipText='Last Month'
+                type='total_new_issues'
+                data={dataSmallChart}
+                icon={<Icon icon='fluent-mdl2:issue-tracking' />} // TODO: revisar icono para mostrar
               />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />
             )}
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
-            {data.data ? (
-              <TotalGrowth title={'Total New CBV'} subtitle={'by severity'} data={data} colorType={'severity'} />
+            {dataSmallChart.blockchains ? (
+              <SmallStatisticsCards
+                stats='Most New Issues'
+                color='primary'
+                chipText='Last Month'
+                type='blockchain_with_most_new_issues'
+                data={dataSmallChart}
+                icon={<Icon icon='eos-icons:blockchain' />} // TODO: revisar icono para mostrar
+              />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='200px' />
+            )}
+          </Grid>
+          <Grid item xs={6} sm={3} md={2}>
+            {dataSmallChart.blockchains ? (
+              <TotalGrowth // TODO: revisar colores
+                title={'Total New CBV'}
+                subtitle={'by blockchain'}
+                data={dataSmallChart}
+              />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='200px' />
+            )}
+          </Grid>
+          <Grid item xs={6} sm={3} md={2}>
+            {dataSmallChart.severities ? (
+              <TotalGrowth
+                title={'Total New CBV'}
+                subtitle={'by severity'}
+                data={dataSmallChart}
+                colorType={'severity'}
+              />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />
             )}
           </Grid>
           <Grid item xs={12} md={4}>
-            <TopContributorAward user={'@BMogetta'} amount={'5'} />
+            {dataSmallChart.contributors ? (
+              <TopContributorAward data={dataSmallChart} />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='200px' />
+            )}
           </Grid>
           {
             <Grid item xs={12} md={4}>
-              {data.find_for_home_page ? (
-                <SeverityIssuesPie data={[20, 40, 60, 10]} labels={['Low', 'Medium', 'High', 'Critical']} />
+              {dataBigChart.severities ? (
+                <SeverityIssuesPie data={dataBigChart} />
               ) : (
                 <Skeleton variant='rectangular' animation='pulse' height='470px' />
               )}
@@ -112,7 +177,11 @@ const Home = () => {
             <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />
           </Grid>
           <Grid item xs={12} md={6}>
-            <ContributorsRanking />
+            {dataRanking.contributors ? (
+              <ContributorsRanking allTime={dataRanking} lastMonth={dataSmallChart} />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='200px' />
+            )}
           </Grid>
           <Grid item xs={12} md={6}>
             <LastAddedIssues />

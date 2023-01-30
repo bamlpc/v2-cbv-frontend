@@ -34,11 +34,10 @@ const TotalGrowth = (props: pieDataProps) => {
   // Obj to array, sort mayor to minor, trim at four,to object
   const sortable = Object.entries(raw_data)
     .sort(([, a], [, b]) => b - a)
-    .map((item, index) => {
+    .filter((item, index) => {
       if (index <= 3 && item) return item
     })
 
-  //@ts-ignore: correct type
   const sorted = Object.fromEntries(sortable)
   const labels = Object.keys(sorted)
   const pieData = Object.values(sorted)
@@ -51,17 +50,16 @@ const TotalGrowth = (props: pieDataProps) => {
     colors:
       props.colorType === 'severity'
         ? [
-            customColors.labels[0],
-            customColors.labels[1] || customColors.labels[0],
-            customColors.labels[2] || customColors.labels[0],
-            customColors.labels[3] || customColors.labels[0]
+            customColors[labels[0]],
+            customColors[labels[1]] || customColors[labels[0]],
+            customColors[labels[2]] || customColors[labels[0]],
+            customColors[labels[3]] || customColors[labels[0]]
           ]
-        : ['#0868ac', '#2b8cbe', '#4eb3d3', '#7bccc4'],
+        : ['#987554', '#B99976', '#D2B48C', '#E5D3B3'],
 
-    //@ts-ignore: correct type
     labels: labels,
     tooltip: {
-      y: { formatter: (val: number) => `${val}%` }
+      y: { formatter: (val: number) => `${val}` }
     },
     dataLabels: {
       enabled: false
@@ -87,13 +85,13 @@ const TotalGrowth = (props: pieDataProps) => {
               fontWeight: 600,
               fontSize: '1rem',
               color: theme.palette.text.secondary,
-              formatter: val => (typeof val === 'string' ? `${val}%` : `${sumPieData}`)
+              formatter: val => (typeof val === 'string' ? `${val}` : `${sumPieData}`)
             },
             value: {
               offsetY: 6,
               fontWeight: 600,
               fontSize: '1rem',
-              formatter: val => `${val}%`,
+              formatter: val => `${val}`,
               color: theme.palette.text.secondary
             }
           }

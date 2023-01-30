@@ -12,7 +12,7 @@ import TableContainer from '@mui/material/TableContainer'
 import { Skeleton } from '@mui/material'
 
 // ** Custom Components Imports
-import OptionsMenu from 'src/@core/components/option-menu'
+//import OptionsMenu from 'src/@core/components/option-menu'
 
 // ** React
 import { useEffect, useState } from 'react'
@@ -72,26 +72,23 @@ const LastAddedIssues = () => {
       {searchLastTen.length ? (
         <Card>
           <CardHeader
-            title='Last Indexed Blockchain Issues'
+            title='Newest 10 Indexed Blockchain Issues'
             titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
-            action={
+
+            /* action={
               <OptionsMenu
                 options={['Last 10', 'This week']}
                 iconButtonProps={{ size: 'small', className: 'card-more-options' }}
-
-                // TODO: ADD FUNCTIONALITY TO CHANGE TEXT AND DISPLAY WHEN CHOOSIN IN OPTION MENU
               />
-            }
+            } */
           />
           <CardContent sx={{ pb: theme => `${theme.spacing(1.75)} !important` }}>
-            <Typography variant='subtitle1'>Last 10</Typography>
-
             <TableContainer>
               <Table>
                 <TableBody>
                   {searchLastTen.length !== 0
-                    ? searchLastTen.map((row: DataType) => {
-                        return (
+                    ? searchLastTen.map((row: DataType, index) => {
+                        return index !== 0 ? (
                           <TableRow
                             key={row._id}
                             sx={{
@@ -110,15 +107,57 @@ const LastAddedIssues = () => {
                               </Box>
                             </TableCell>
                             <TableCell>
-                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                                <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
-                                  {row.cbv.blockchain}
-                                </Typography>
-                                {row.cbv.severity}
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
+                                <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.cbv.blockchain}</Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
+                                <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.cbv.severity}</Typography>
                               </Box>
                             </TableCell>
                             <TableCell align='right'>
-                              <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.cbv.title}</Typography>
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
+                                <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.title}</Typography>
+                              </Box>
+                            </TableCell>
+                          </TableRow>
+                        ) : (
+                          <TableRow
+                            key={row._id}
+                            sx={{
+                              '&:last-of-type td': { border: 0, pb: 0 },
+                              '&:first-of-type td': { borderTop: theme => `1px solid ${theme.palette.divider}` },
+                              '& .MuiTableCell-root': {
+                                '&:last-of-type': { pr: 0 },
+                                '&:first-of-type': { pl: 0 },
+                                py: theme => `${theme.spacing(2.75)} !important`
+                              }
+                            }}
+                          >
+                            <TableCell>
+                              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{'Code'}</Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                                <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
+                                  {'Blockchain'}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                                <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
+                                  {'Severity'}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell align='right'>
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
+                                <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{'Title'}</Typography>
+                              </Box>
                             </TableCell>
                           </TableRow>
                         )

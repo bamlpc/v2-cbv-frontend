@@ -95,7 +95,7 @@ const columns = (): GridColumns => {
                 variant='body2'
                 sx={{ color: params.row.cbv.severity ? customColors[params.row.cbv.severity] : 'text.primary' }}
               >
-                {`${params.row.cbv.severity} - ${params.row.cbv.score}`}
+                {`${params.row.cbv.severity}`}
               </Typography>
             </Tooltip>
           </MUILink>

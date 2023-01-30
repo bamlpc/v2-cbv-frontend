@@ -19,123 +19,56 @@ import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
-import OptionsMenu from 'src/@core/components/option-menu'
+
+//import OptionsMenu from 'src/@core/components/option-menu'
 
 interface DataType {
   username: string
   new_issues: string
-  trend: ReactNode
-  ranking: string
+  trend?: ReactNode
+  contribution: string
 }
 
 //TODO: CREATE A FUNCTION THAT RETURNS THIS
-const data: DataType[] = [
-  {
-    new_issues: '10',
-    username: '@BMogetta',
-    ranking: '1',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '9',
-    username: '@BMogetta',
-    ranking: '2',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '8',
-    username: '@BMogetta',
-    ranking: '3',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '7',
-    username: '@BMogetta',
-    ranking: '4',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '6',
-    username: '@BMogetta',
-    ranking: '5',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '5',
-    username: '@BMogetta',
-    ranking: '6',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '4',
-    username: '@BMogetta',
-    ranking: '7',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '3',
-    username: '@BMogetta',
-    ranking: '8',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '2',
-    username: '@BMogetta',
-    ranking: '9',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  },
-  {
-    new_issues: '1',
-    username: '@BMogetta',
-    ranking: '10',
-    trend: (
-      <Box component='span' sx={{ display: 'flex', color: 'error.main' }}>
-        <Icon icon='mdi:chevron-down' />
-      </Box>
-    )
-  }
-]
+const data = (args: [string, number][], totalIssues: number): DataType[] => {
+  const dataArray: DataType[] = [{ new_issues: `Total of Issues`, username: `User`, contribution: `Contribution %` }]
+
+  args.forEach(item => {
+    const contribution = (item[1] / totalIssues) * 100
+    dataArray.push({
+      new_issues: `${item[1]}`,
+      username: `${item[0]}`,
+      contribution: `${contribution}`,
+      trend: (
+        <Box component='span' sx={{ display: 'flex', transform: 'scale(0.5)', ml: -2 }}>
+          <Icon icon='fluent-mdl2:calculator-percentage' />
+        </Box>
+      )
+    })
+  })
+
+  return dataArray
+}
 
 // TODO: add a field to the database to store the current time at the moment to be store so its easy to retrieve and sort
-const ContributorsRanking = () => {
-  const number_of_issues = 130
-  const issues_added_last_month = 65
+const ContributorsRanking = (props: Record<string, Record<string, string>>) => {
+  const raw_data: Record<string, number> = JSON.parse(props.allTime.contributors)
+
+  // Obj to array, sort mayor to minor, trim at four,to object
+  const sortable = Object.entries(raw_data)
+    .sort(([, a], [, b]) => b - a)
+    .filter((item, index) => {
+      if (index <= 9 && item) return item
+    })
+  const totalIssues = sortable.reduce((acc, curr) => {
+    return acc + curr[1]
+  }, 0)
+  const renderData = data(sortable, totalIssues)
+
+  const last_month: Record<string, number> = JSON.parse(props.lastMonth.contributors)
+  const issues_added_last_month = Object.entries(last_month).reduce((acc, curr) => {
+    return acc + curr[1]
+  }, 0)
 
   return (
     <>
@@ -144,35 +77,34 @@ const ContributorsRanking = () => {
           <CardHeader
             title='TOP CONTRIBUTORS'
             titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
-            action={
+
+            /* action={
               <OptionsMenu
                 options={['Last Month', 'All Time']}
                 iconButtonProps={{ size: 'small', className: 'card-more-options' }}
-
-                // TODO: ADD FUNCTIONALITY TO CHANGE TEXT AND RANKING WHEN CHOOSIN IN OPTION MENU
               />
-            }
+            } */
           />
           <CardContent sx={{ pb: theme => `${theme.spacing(1.75)} !important` }}>
             <Box sx={{ mb: 5, display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 1.25, display: 'flex', alignItems: 'center' }}>
                 <Typography variant='h3' sx={{ mr: 3.5 }}>
-                  {number_of_issues}
+                  {`${totalIssues} Reports`}
                 </Typography>
                 <CustomChip
                   size='medium'
-                  label={`+${issues_added_last_month}`}
+                  label={`+${issues_added_last_month} reports added last month`}
                   color='success'
                   sx={{ height: 20, fontSize: '0.75rem', fontWeight: 500 }}
                 />
               </Box>
-              <Typography variant='caption'>Last Month</Typography>
+              <Typography variant='caption'>All time contributors</Typography>
             </Box>
 
             <TableContainer>
               <Table>
                 <TableBody>
-                  {data.map((row: DataType) => {
+                  {renderData.map((row: DataType, index) => {
                     return (
                       <TableRow
                         key={row.username}
@@ -188,16 +120,20 @@ const ContributorsRanking = () => {
                       >
                         <TableCell>
                           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Typography sx={{ fontSize: '0.875rem' }}>{row.username}</Typography>
+                            <Typography sx={{ fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
+                              {row.username}
+                            </Typography>
                           </Box>
                         </TableCell>
                         <TableCell align='right'>
-                          <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.new_issues}</Typography>
+                          <Typography sx={{ fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
+                            {row.new_issues}
+                          </Typography>
                         </TableCell>
                         <TableCell>
                           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
-                              {row.ranking}
+                            <Typography sx={{ mr: 1.5, fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
+                              {row.contribution}
                             </Typography>
                             {row.trend}
                           </Box>

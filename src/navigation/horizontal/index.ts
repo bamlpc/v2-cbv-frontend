@@ -14,8 +14,10 @@ const navigation = (): HorizontalNavItemsType => [
   },
   {
     title: 'Attack Techniques',
-    path: '/attacktechniques',
-    icon: 'mdi:file-document-alert-outline'
+    path: 'https://hacken-3.gitbook.io/l1-security/',
+    icon: 'mdi:file-document-alert-outline',
+    externalLink: true,
+    openInNewTab: true
   },
   {
     title: 'Documentation',
@@ -24,7 +26,9 @@ const navigation = (): HorizontalNavItemsType => [
   },
   {
     title: 'Github',
-    path: '/github',
+    path: 'https://github.com/bamlpc/common-blockchain-vulnerabilities',
+    externalLink: true,
+    openInNewTab: true,
     icon: 'mdi:github'
   },
   {

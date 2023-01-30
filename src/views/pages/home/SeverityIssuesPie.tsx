@@ -13,15 +13,14 @@ import Icon from 'src/@core/components/icon'
 import { ApexOptions } from 'apexcharts'
 
 // ** Custom Components Imports
-import OptionsMenu from 'src/@core/components/option-menu'
+//import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 interface SeverityIssuesPieProps {
-  data: Array<number>
-  labels: Array<string>
+  data: Record<string, string>
 }
 
 const customColors = {
@@ -34,6 +33,10 @@ const customColors = {
 const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {
   // ** Hook
   const theme = useTheme()
+
+  const raw_data: Record<string, number> = JSON.parse(props.data.severities)
+  const series = [raw_data.Low || 0, raw_data.Medium, raw_data.High, raw_data.Critical]
+
   const options: ApexOptions = {
     chart: {
       sparkline: { enabled: true }
@@ -48,7 +51,7 @@ const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {
     tooltip: { enabled: false },
     dataLabels: { enabled: false },
     stroke: { width: 3, lineCap: 'round', colors: [theme.palette.background.paper] },
-    labels: props.labels,
+    labels: /* props.labels */ ['Low', 'Medium', 'High', 'Critical'],
     states: {
       hover: {
         filter: { type: 'none' }
@@ -103,15 +106,16 @@ const SeverityIssuesPie = (props: SeverityIssuesPieProps) => {
     <Card>
       <CardHeader
         title='Issus by Severity'
-        action={
+
+        /* action={
           <OptionsMenu
             options={['Last 28 Days', 'Last Month', 'Last Year']}
             iconButtonProps={{ size: 'small', className: 'card-more-options' }}
           />
-        }
+        } */
       />
       <CardContent>
-        <ReactApexcharts type='donut' height={257} options={options} series={props.data} />
+        <ReactApexcharts type='donut' height={257} options={options} series={series} />
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
           <Box sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: customColors.Low } }}>
             <Icon icon='mdi:circle' fontSize='0.75rem' />
