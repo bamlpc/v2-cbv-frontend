@@ -13,6 +13,10 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 import { Skeleton } from '@mui/material'
+import { Link as MUILink, Tooltip } from '@mui/material'
+
+//
+import NextLink from 'next/link'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -120,22 +124,53 @@ const ContributorsRanking = (props: Record<string, Record<string, string>>) => {
                       >
                         <TableCell>
                           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Typography sx={{ fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
-                              {row.username}
-                            </Typography>
+                            {index === 0 ? (
+                              <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.username}</Typography>
+                            ) : (
+                              <NextLink href={`/list?search=${encodeURIComponent(row.username)}`} passHref>
+                                <MUILink variant='body2'>
+                                  <Tooltip title={`See all the contributions of ${row.username}`}>
+                                    <Typography sx={{ fontSize: '0.875rem' }}>{row.username}</Typography>
+                                  </Tooltip>
+                                </MUILink>
+                              </NextLink>
+                            )}
                           </Box>
                         </TableCell>
                         <TableCell align='right'>
-                          <Typography sx={{ fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
-                            {row.new_issues}
-                          </Typography>
+                          {index === 0 ? (
+                            <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.new_issues}</Typography>
+                          ) : (
+                            <NextLink href={`/list?search=${encodeURIComponent(row.username)}`} passHref>
+                              <MUILink variant='body2'>
+                                <Tooltip title={`See all the contributions of ${row.username}`}>
+                                  <Typography sx={{ fontSize: '0.875rem' }}>{row.new_issues}</Typography>
+                                </Tooltip>
+                              </MUILink>
+                            </NextLink>
+                          )}
                         </TableCell>
                         <TableCell>
                           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <Typography sx={{ mr: 1.5, fontWeight: index === 0 ? 600 : null, fontSize: '0.875rem' }}>
-                              {row.contribution}
-                            </Typography>
-                            {row.trend}
+                            {index === 0 ? (
+                              <>
+                                <Typography sx={{ mr: 1.5, fontWeight: 600, fontSize: '0.875rem' }}>
+                                  {row.contribution}
+                                </Typography>
+                                {row.trend}
+                              </>
+                            ) : (
+                              <>
+                                <NextLink href={`/list?search=${encodeURIComponent(row.username)}`} passHref>
+                                  <MUILink variant='body2'>
+                                    <Tooltip title={`See all the contributions of ${row.username}`}>
+                                      <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.contribution}</Typography>
+                                    </Tooltip>
+                                  </MUILink>
+                                </NextLink>
+                                {row.trend}
+                              </>
+                            )}
                           </Box>
                         </TableCell>
                       </TableRow>
