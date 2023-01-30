@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useCallback, useRef, useState, ChangeEvent } from 'react'
+import { useEffect, useRef, useState, ChangeEvent, KeyboardEvent } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -19,9 +19,6 @@ import { styled, useTheme } from '@mui/material/styles'
 import ListItemButton from '@mui/material/ListItemButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
-
-// ** Third Party Imports
-import axios from 'axios'
 
 // ** Types Imports
 import { AppBarSearchType } from 'src/@fake-db/types'
@@ -58,102 +55,82 @@ interface DefaultSuggestionsType {
 
 const defaultSuggestionsData: DefaultSuggestionsType[] = [
   {
-    category: 'Popular Searches',
+    category: 'Some Key words',
     suggestions: [
       {
         icon: 'mdi:chart-donut',
-        suggestion: 'CRM',
-        link: '/dashboards/crm'
+        suggestion: 'VM',
+        link: '/list?search=vm'
       },
       {
         icon: 'mdi:poll',
-        suggestion: 'Analytics',
-        link: '/dashboards/analytics'
+        suggestion: 'Consensus',
+        link: '/list?search=consensus'
       },
       {
         icon: 'mdi:chart-bubble',
-        suggestion: 'eCommerce',
-        link: '/dashboards/ecommerce'
+        suggestion: 'Validation',
+        link: '/list?search=validation'
       },
       {
         icon: 'mdi:account-group',
-        suggestion: 'User List',
-        link: '/apps/user/list'
+        suggestion: 'Cryptographic',
+        link: '/list?search=cryptographic'
       }
     ]
   },
   {
-    category: 'Apps & Pages',
+    category: 'Severity ',
     suggestions: [
       {
         icon: 'mdi:calendar-blank',
-        suggestion: 'Calendar',
-        link: '/apps/calendar'
+        suggestion: 'Critical',
+        link: '/list?search=critical'
       },
       {
         icon: 'mdi:format-list-numbered',
-        suggestion: 'Invoice List',
-        link: '/apps/invoice/list'
+        suggestion: 'High',
+        link: '/list?search=high'
       },
       {
         icon: 'mdi:currency-usd',
-        suggestion: 'Pricing',
-        link: '/pages/pricing'
+        suggestion: 'Medium',
+        link: '/list?search=medium'
       },
       {
         icon: 'mdi:account-cog-outline',
-        suggestion: 'Account Settings',
-        link: '/pages/account-settings/account'
+        suggestion: 'Low',
+        link: '/list?search=low'
       }
     ]
   },
   {
-    category: 'User Interface',
+    category: 'Blockchain',
     suggestions: [
       {
         icon: 'mdi:format-text-variant-outline',
-        suggestion: 'Typography',
-        link: '/ui/typography'
+        suggestion: 'Bitcoin',
+        link: '/list?search=bitcoin'
       },
       {
         icon: 'mdi:tab',
-        suggestion: 'Tabs',
-        link: '/components/tabs'
-      },
-      {
-        icon: 'mdi:gesture-tap-button',
-        suggestion: 'Buttons',
-        link: '/components/buttons'
-      },
-      {
-        icon: 'mdi:card-bulleted-settings-outline',
-        suggestion: 'Advanced Cards',
-        link: '/ui/cards/advanced'
+        suggestion: 'Ethereum',
+        link: '/list?search=ethereum'
       }
     ]
   },
   {
-    category: 'Forms & Tables',
+    category: 'Layers',
     suggestions: [
       {
         icon: 'mdi:format-list-checkbox',
-        suggestion: 'Select',
-        link: '/forms/form-elements/select'
+        suggestion: 'Layer 1',
+        link: '/list?search=layer%201'
       },
       {
         icon: 'mdi:lastpass',
-        suggestion: 'Autocomplete',
-        link: '/forms/form-elements/autocomplete'
-      },
-      {
-        icon: 'mdi:view-grid-outline',
-        suggestion: 'Table',
-        link: '/tables/mui'
-      },
-      {
-        icon: 'mdi:calendar-range',
-        suggestion: 'Date Pickers',
-        link: '/forms/form-elements/pickers'
+        suggestion: 'Layer 2',
+        link: '/list?search=layer%202'
       }
     ]
   }
@@ -244,85 +221,6 @@ const Dialog = styled(MuiDialog)({
   }
 })
 
-const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
-      <Box sx={{ mb: 2.5, color: 'text.primary' }}>
-        <Icon icon='mdi:file-remove-outline' fontSize='5rem' />
-      </Box>
-      <Typography variant='h6' sx={{ mb: 11.5, wordWrap: 'break-word' }}>
-        No results for{' '}
-        <Typography variant='h6' component='span' sx={{ wordWrap: 'break-word' }}>
-          {`"${value}"`}
-        </Typography>
-      </Typography>
-
-      <Typography variant='body2' sx={{ mb: 2.5, color: 'text.disabled' }}>
-        Try searching for
-      </Typography>
-      <List sx={{ py: 0 }}>
-        <ListItem sx={{ py: 2 }} disablePadding onClick={() => setOpenDialog(false)}>
-          <Box
-            component={Link}
-            href='/dashboards/crm'
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' }
-            }}
-          >
-            <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
-              <Icon icon='mdi:cart-outline' fontSize={20} />
-            </Box>
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              CRM Dashboard
-            </Typography>
-          </Box>
-        </ListItem>
-        <ListItem sx={{ py: 2 }} disablePadding onClick={() => setOpenDialog(false)}>
-          <Box
-            component={Link}
-            href='/issue/profile'
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' }
-            }}
-          >
-            <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
-              <Icon icon='mdi:account-outline' fontSize={20} />
-            </Box>
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              User Profile
-            </Typography>
-          </Box>
-        </ListItem>
-        <ListItem sx={{ py: 2 }} disablePadding onClick={() => setOpenDialog(false)}>
-          <Box
-            component={Link}
-            href='/pages/account-settings/account'
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' }
-            }}
-          >
-            <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
-              <Icon icon='mdi:account-cog-outline' fontSize={20} />
-            </Box>
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              Account Settings
-            </Typography>
-          </Box>
-        </ListItem>
-      </List>
-    </Box>
-  )
-}
-
 const DefaultSuggestions = ({ setOpenDialog }: DefaultSuggestionsProps) => {
   return (
     <Grid container spacing={6} sx={{ ml: 0 }}>
@@ -366,6 +264,8 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [searchValue, setSearchValue] = useState<string>('')
   const [openDialog, setOpenDialog] = useState<boolean>(false)
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [options, setOptions] = useState<AppBarSearchType[]>([])
 
   // ** Hooks & Vars
@@ -376,19 +276,6 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
   const fullScreenDialog = useMediaQuery(theme.breakpoints.down('sm'))
 
   // Get all data using API
-  useEffect(() => {
-    axios
-      .get('/app-bar/search', {
-        params: { q: searchValue }
-      })
-      .then(response => {
-        if (response.data && response.data.length) {
-          setOptions(response.data)
-        } else {
-          setOptions([])
-        }
-      })
-  }, [searchValue])
 
   useEffect(() => {
     if (!openDialog) {
@@ -411,37 +298,38 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
     }
   }
 
-  // Handle ESC & shortcut keys keydown events
-  const handleKeydown = useCallback(
-    (event: KeyboardEvent) => {
-      // ** Shortcut keys to open searchbox (Ctrl + /)
-      if (!openDialog && event.ctrlKey && event.which === 191) {
-        setOpenDialog(true)
-      }
-    },
-    [openDialog]
-  )
-
-  // Handle shortcut keys keyup events
-  const handleKeyUp = useCallback(
-    (event: KeyboardEvent) => {
-      // ** ESC key to close searchbox
-      if (openDialog && event.keyCode === 27) {
-        setOpenDialog(false)
-      }
-    },
-    [openDialog]
-  )
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeydown)
-    document.addEventListener('keyup', handleKeyUp)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeydown)
-      document.removeEventListener('keyup', handleKeyUp)
+  // search bar personalize string querie
+  const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
+    const handleSearch = (string: string) => {
+      setOpenDialog(false)
+      const encode = encodeURI(string)
+      router.push(`/list?search=${encode}`)
     }
-  }, [handleKeyUp, handleKeydown])
+
+    // TODO: finish this handler
+    const handleEnter = (event: KeyboardEvent<HTMLSpanElement>, value: string) => {
+      console.log(event, value)
+      if (event.key === 'Enter') handleSearch(value)
+    }
+
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
+        <Typography variant='h3' sx={{ mb: 2.5, color: 'text.disabled' }}>
+          Search:
+        </Typography>
+        <Typography
+          variant='h3'
+          sx={{ mb: 2.5, color: 'text.disabled' }}
+          onClick={() => handleSearch(value)}
+          onKeyDown={event => {
+            if (event.key === 'Enter') handleEnter(event, value)
+          }}
+        >
+          {value}
+        </Typography>
+      </Box>
+    )
+  }
 
   if (!isMounted) {
     return null

@@ -111,7 +111,7 @@ const Home = () => {
                 chipText='Last Month'
                 type='total_new_issues'
                 data={dataSmallChart}
-                icon={<Icon icon='fluent-mdl2:issue-tracking' />} // TODO: revisar icono para mostrar
+                icon={<Icon icon='fluent-mdl2:issue-tracking' />}
               />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />
@@ -125,7 +125,7 @@ const Home = () => {
                 chipText='Last Month'
                 type='blockchain_with_most_new_issues'
                 data={dataSmallChart}
-                icon={<Icon icon='eos-icons:blockchain' />} // TODO: revisar icono para mostrar
+                icon={<Icon icon='eos-icons:blockchain' />}
               />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />
@@ -133,11 +133,7 @@ const Home = () => {
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             {dataSmallChart.blockchains ? (
-              <TotalGrowth // TODO: revisar colores
-                title={'Total New CBV'}
-                subtitle={'by blockchain'}
-                data={dataSmallChart}
-              />
+              <TotalGrowth title={'Total New CBV'} subtitle={'by blockchain'} data={dataSmallChart} />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />
             )}
@@ -177,7 +173,7 @@ const Home = () => {
             <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />
           </Grid>
           <Grid item xs={12} md={6}>
-            {dataRanking.contributors ? (
+            {dataRanking.contributors && dataSmallChart.blockchains ? (
               <ContributorsRanking allTime={dataRanking} lastMonth={dataSmallChart} />
             ) : (
               <Skeleton variant='rectangular' animation='pulse' height='200px' />

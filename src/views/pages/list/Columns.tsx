@@ -1,15 +1,10 @@
-// ** React Imports
-import { useContext } from 'react'
-
+//
 import NextLink from 'next/link'
 
 //
 import { Link as MUILink, Tooltip } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { GridColumns, GridRenderCellParams } from '@mui/x-data-grid'
-
-//
-import { QueryContext } from './QueryContext'
 
 function trimShortDescription(description: string): string {
   const maxLength = 100
@@ -53,15 +48,14 @@ const columns = (): GridColumns => {
       field: 'blockchain',
       headerName: 'Blockchain',
       renderCell: (params: GridRenderCellParams) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, react-hooks/rules-of-hooks
-        const { searchStringQuery, setSearchStringQuery }: any = useContext(QueryContext)
-
         return (
-          <MUILink variant='body2' onClick={() => setSearchStringQuery(params.row.cbv.blockchain)}>
-            <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
-              {params.row.cbv.blockchain}
-            </Typography>
-          </MUILink>
+          <NextLink href={`/list?search=${encodeURIComponent(params.row.cbv.blockchain.toLowerCase())}`} passHref>
+            <MUILink variant='body2'>
+              <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
+                {params.row.cbv.blockchain}
+              </Typography>
+            </MUILink>
+          </NextLink>
         )
       }
     },
@@ -124,15 +118,14 @@ const columns = (): GridColumns => {
       headerName: 'Credits',
 
       renderCell: (params: GridRenderCellParams) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, react-hooks/rules-of-hooks
-        const { searchStringQuery, setSearchStringQuery }: any = useContext(QueryContext)
-
         return (
-          <MUILink variant='body2' onClick={() => setSearchStringQuery(params.row.cbv.credits)}>
-            <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
-              {params.row.cbv.credits || 'Anonymous'}
-            </Typography>
-          </MUILink>
+          <NextLink href={`/list?search=${encodeURIComponent(params.row.cbv.credits.toLowerCase())}`} passHref>
+            <MUILink variant='body2'>
+              <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
+                {params.row.cbv.credits || 'Anonymous'}
+              </Typography>
+            </MUILink>
+          </NextLink>
         )
       }
     }
