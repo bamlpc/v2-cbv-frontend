@@ -10,6 +10,10 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 import { Skeleton } from '@mui/material'
+import { Link as MUILink, Tooltip } from '@mui/material'
+
+//
+import NextLink from 'next/link'
 
 // ** Custom Components Imports
 //import OptionsMenu from 'src/@core/components/option-menu'
@@ -30,6 +34,17 @@ interface DataType {
   _id: string
   cbv: CBV
 }
+
+function trimShortDescription(description: string): string {
+  const maxLength = 100
+  if (description.length < maxLength) return description
+  else {
+    const returnString = description.slice(0, maxLength).concat('...')
+
+    return returnString
+  }
+}
+
 const LastAddedIssues = () => {
   const [searchLastTen, setSearchLastTen] = useState<DataType[]>([])
 
@@ -103,22 +118,48 @@ const LastAddedIssues = () => {
                           >
                             <TableCell>
                               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.cbv_id}</Typography>
+                                <NextLink href={`/issue/${row.cbv.cbv_id}/main`} passHref>
+                                  <MUILink variant='body2'>
+                                    <Tooltip title={trimShortDescription(row.cbv.short_description)}>
+                                      <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.cbv_id} </Typography>
+                                    </Tooltip>
+                                  </MUILink>
+                                </NextLink>
                               </Box>
                             </TableCell>
                             <TableCell>
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
-                                <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.cbv.blockchain}</Typography>
+                                <NextLink href={`/list?search=${row.cbv.blockchain}`} passHref>
+                                  <MUILink variant='body2'>
+                                    <Tooltip title={`More ${row.cbv.blockchain} Issues`}>
+                                      <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>
+                                        {row.cbv.blockchain}
+                                      </Typography>
+                                    </Tooltip>
+                                  </MUILink>
+                                </NextLink>
                               </Box>
                             </TableCell>
                             <TableCell>
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
-                                <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.cbv.severity}</Typography>
+                                <NextLink href={`/issue/${row.cbv.cbv_id}/main`} passHref>
+                                  <MUILink variant='body2'>
+                                    <Tooltip title={trimShortDescription(row.cbv.recommendation)}>
+                                      <Typography sx={{ mr: 1.5, fontSize: '0.875rem' }}>{row.cbv.severity}</Typography>
+                                    </Tooltip>
+                                  </MUILink>
+                                </NextLink>
                               </Box>
                             </TableCell>
                             <TableCell align='right'>
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'normal' }}>
-                                <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.title}</Typography>
+                                <NextLink href={`/issue/${row.cbv.cbv_id}/main`} passHref>
+                                  <MUILink variant='body2'>
+                                    <Tooltip title={trimShortDescription(row.cbv.short_description)}>
+                                      <Typography sx={{ fontSize: '0.875rem' }}>{row.cbv.title}</Typography>
+                                    </Tooltip>
+                                  </MUILink>
+                                </NextLink>
                               </Box>
                             </TableCell>
                           </TableRow>

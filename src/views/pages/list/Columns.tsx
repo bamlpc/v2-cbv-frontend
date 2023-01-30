@@ -51,9 +51,11 @@ const columns = (): GridColumns => {
         return (
           <NextLink href={`/list?search=${encodeURIComponent(params.row.cbv.blockchain.toLowerCase())}`} passHref>
             <MUILink variant='body2'>
-              <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
-                {params.row.cbv.blockchain}
-              </Typography>
+              <Tooltip title={`More ${params.row.cbv.blockchain} Issues`}>
+                <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
+                  {params.row.cbv.blockchain}
+                </Typography>
+              </Tooltip>
             </MUILink>
           </NextLink>
         )
@@ -104,9 +106,11 @@ const columns = (): GridColumns => {
       renderCell: (params: GridRenderCellParams) => (
         <NextLink href={`/issue/${params.row.cbv.cbv_id}/main`} passHref>
           <MUILink variant='body2'>
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              {params.row.cbv.updated_at || params.row.cbv.created_at}
-            </Typography>
+            <Tooltip title={trimShortDescription(params.row.cbv.short_description)}>
+              <Typography variant='body2' sx={{ color: 'text.primary' }}>
+                {params.row.cbv.updated_at || params.row.cbv.created_at}
+              </Typography>
+            </Tooltip>
           </MUILink>
         </NextLink>
       )
@@ -121,9 +125,11 @@ const columns = (): GridColumns => {
         return (
           <NextLink href={`/list?search=${encodeURIComponent(params.row.cbv.credits.toLowerCase())}`} passHref>
             <MUILink variant='body2'>
-              <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
-                {params.row.cbv.credits || 'Anonymous'}
-              </Typography>
+              <Tooltip title={`See all issues reported by ${params.row.cbv.credits}`}>
+                <Typography variant='body2' sx={{ color: 'text.primary', ':hover': { cursor: 'pointer' } }}>
+                  {params.row.cbv.credits || 'Anonymous'}
+                </Typography>
+              </Tooltip>
             </MUILink>
           </NextLink>
         )
