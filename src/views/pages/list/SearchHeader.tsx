@@ -10,6 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
+import { Button } from '@mui/material'
 
 //
 import { useRouter } from 'next/router'
@@ -63,6 +64,10 @@ const SearchHeader = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const router = useRouter()
+
+  const resetFilter = () => {
+    router.push(`/list?search=cbv`)
+  }
 
   return (
     <CardContentNoPadding
@@ -131,6 +136,9 @@ const SearchHeader = () => {
       />
 
       <Typography variant='body2'>Search & Filter at pleasure</Typography>
+      <Button onClick={() => resetFilter()} style={{ marginTop: '1rem', border: '1px solid white' }}>
+        Reset filter
+      </Button>
     </CardContentNoPadding>
   )
 }
