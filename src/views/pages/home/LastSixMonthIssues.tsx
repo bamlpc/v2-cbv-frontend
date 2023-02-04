@@ -41,20 +41,27 @@ function getLastSixMonth() {
   return month
 }
 
-const LastSixMonthIssues = (props: Record<string, number[]>) => {
+interface HistoricalData {
+  average_severity: string
+  number_of_issues: string
+}
+
+const LastSixMonthIssues = ({ data }: { data: HistoricalData[] }) => {
+  const serieDataScore = data.map((item: HistoricalData) => Number(item.average_severity))
+  const serieDataIssue = data.map((item: HistoricalData) => Number(item.number_of_issues))
   const series = [
     {
-      name: 'Issues',
+      name: 'Average severity score',
       type: 'column',
-      data: props.data
+      data: serieDataIssue
     },
     {
       type: 'line',
       name: 'Issues',
-      data: props.data
+      data: serieDataScore
     }
   ]
-  const max_height = Math.max(...props.data) * 1.15 //extra 15% for display clarity
+  const max_height = 10
 
   // ** Hook
   const theme = useTheme()
@@ -133,29 +140,12 @@ const LastSixMonthIssues = (props: Record<string, number[]>) => {
   }
 
   return (
-    <>
-      {true ? (
-        <Card>
-          <CardHeader
-            title='Issues added in the last 6 months'
-            action={
-              <OptionsMenu
-                options={['Refresh', 'Update', 'Share']}
-                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
-              />
-            }
-          />
-          <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-            <ReactApexcharts type='line' height={208} series={series} options={options} />
-            <Button fullWidth variant='contained'>
-              Details
-            </Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Skeleton variant='rectangular' animation='pulse' height='470px' />
-      )}
-    </>
+    <Card>
+      <CardHeader title='Average Severity Score with Nº of Issues' />
+      <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
+        <ReactApexcharts type='line' height={265} series={series} options={options} />
+      </CardContent>
+    </Card>
   )
 }
 

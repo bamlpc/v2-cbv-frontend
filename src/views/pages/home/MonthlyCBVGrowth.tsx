@@ -10,16 +10,18 @@ import { Skeleton } from '@mui/material'
 import { ApexOptions } from 'apexcharts'
 
 // ** Custom Components Imports
-import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
-interface GraphProps {
-  data: Array<number>
+interface HistoricalData {
+  average_severity: string
+  number_of_issues: string
 }
 
-const MonthlyCBVGrowth = (props: GraphProps) => {
+const MonthlyCBVGrowth = ({ data }: { data: HistoricalData[] }) => {
   // ** Hook
   const theme = useTheme()
+
+  const serieData = data.map((item: HistoricalData) => Number(item.number_of_issues))
 
   const options: ApexOptions = {
     chart: {
@@ -100,32 +102,18 @@ const MonthlyCBVGrowth = (props: GraphProps) => {
   }
 
   return (
-    <>
-      {true ? (
-        <Card>
-          <CardHeader
-            title='Monthly CBV report'
-            action={
-              <OptionsMenu
-                options={['Refresh', 'Edit', 'Update']}
-                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
-              />
-            }
-          />
-          <CardContent>
-            <ReactApexcharts
-              type='area'
-              height={262}
-              options={options}
-              series={[{ name: 'Traffic Rate', data: props.data }]}
-            />
-            <Typography variant='body2'>Report of new CBV added by month</Typography>
-          </CardContent>
-        </Card>
-      ) : (
-        <Skeleton variant='rectangular' animation='pulse' height='470px' />
-      )}
-    </>
+    <Card>
+      <CardHeader title='Monthly CBV report' />
+      <CardContent>
+        <ReactApexcharts
+          type='area'
+          height={262}
+          options={options}
+          series={[{ name: 'Traffic Rate', data: serieData }]}
+        />
+        <Typography variant='body2'>Report of new CBV added by month</Typography>
+      </CardContent>
+    </Card>
   )
 }
 

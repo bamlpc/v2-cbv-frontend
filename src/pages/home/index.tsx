@@ -25,6 +25,7 @@ const Home = () => {
   const [dataSmallChart, setDataSmallChart] = useState(Object)
   const [dataBigChart, setDataBigChart] = useState(Object)
   const [dataRanking, setDataRanking] = useState(Object)
+  const [historicalData, setHistoricalData] = useState(Object)
 
   // this month
   useEffect(() => {
@@ -99,6 +100,29 @@ const Home = () => {
     dataFetch()
   }, [])
 
+  // historical data
+  useEffect(() => {
+    const dataFetch = async () => {
+      const _data = await (
+        await fetch('https://cbv-api.deno.dev/graphql', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `query {
+              find_report_data{
+                number_of_issues
+                average_severity
+              }
+            }`
+          })
+        })
+      ).json()
+      setHistoricalData(_data.data.find_report_data)
+    }
+    dataFetch()
+  }, [])
+
   // TODO: revisar como retrazar los compoenentes, crasheando mientras se está haciendo el fetch
   return (
     <>
@@ -168,10 +192,18 @@ const Home = () => {
             </Grid>
           }
           <Grid item xs={12} sm={6} md={4}>
-            <LastSixMonthIssues data={[10, 15, 25, 22, 65, 65]} />
+            {historicalData.length ? (
+              <LastSixMonthIssues data={historicalData} />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='470px' />
+            )}
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <MonthlyCBVGrowth data={[0, 3, 10, 65, 130]} />
+            {historicalData.length ? (
+              <MonthlyCBVGrowth data={historicalData} />
+            ) : (
+              <Skeleton variant='rectangular' animation='pulse' height='470px' />
+            )}
           </Grid>
           <Grid item xs={12} md={6}>
             {dataRanking.contributors && dataSmallChart.blockchains ? (
