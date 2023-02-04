@@ -1,6 +1,7 @@
-import { ThemeColor } from 'src/@core/layouts/types'
-
+// ** React Imports
 import { ReactNode } from 'react'
+
+import { ThemeColor } from 'src/@core/layouts/types'
 
 // ** Custom Component Import
 import CardStatisticsVertical from 'src/@core/components/card-statistics/card-stats-vertical'

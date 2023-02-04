@@ -12,6 +12,8 @@ import { PropsCBV } from 'src/context/types'
 
 // ** Components
 import InformationOverview from 'src/views/pages/issue/InformationOverview'
+
+//** Markdown to react
 import ReactMarkdown from 'react-markdown'
 
 // TODO: fix distribution

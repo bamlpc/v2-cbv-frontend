@@ -58,22 +58,22 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
     category: 'Some Key words',
     suggestions: [
       {
-        icon: 'mdi:chart-donut',
+        icon: 'fluent-mdl2:connect-virtual-machine',
         suggestion: 'VM',
         link: '/list?search=vm'
       },
       {
-        icon: 'mdi:poll',
+        icon: 'carbon:group-objects-save',
         suggestion: 'Consensus',
         link: '/list?search=consensus'
       },
       {
-        icon: 'mdi:chart-bubble',
+        icon: 'fluent-mdl2:web-components',
         suggestion: 'Validation',
         link: '/list?search=validation'
       },
       {
-        icon: 'mdi:account-group',
+        icon: 'carbon:ibm-cloud-hyper-protect-crypto-services',
         suggestion: 'Cryptographic',
         link: '/list?search=cryptographic'
       }
@@ -83,22 +83,22 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
     category: 'Severity ',
     suggestions: [
       {
-        icon: 'mdi:calendar-blank',
+        icon: 'pajamas:severity-critical',
         suggestion: 'Critical',
         link: '/list?search=critical'
       },
       {
-        icon: 'mdi:format-list-numbered',
+        icon: 'pajamas:severity-high',
         suggestion: 'High',
         link: '/list?search=high'
       },
       {
-        icon: 'mdi:currency-usd',
+        icon: 'pajamas:severity-medium',
         suggestion: 'Medium',
         link: '/list?search=medium'
       },
       {
-        icon: 'mdi:account-cog-outline',
+        icon: 'pajamas:severity-low',
         suggestion: 'Low',
         link: '/list?search=low'
       }
@@ -108,12 +108,12 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
     category: 'Blockchain',
     suggestions: [
       {
-        icon: 'mdi:format-text-variant-outline',
+        icon: 'mdi:bitcoin',
         suggestion: 'Bitcoin',
         link: '/list?search=bitcoin'
       },
       {
-        icon: 'mdi:tab',
+        icon: 'mdi:ethereum',
         suggestion: 'Ethereum',
         link: '/list?search=ethereum'
       }
@@ -123,12 +123,12 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
     category: 'Layers',
     suggestions: [
       {
-        icon: 'mdi:format-list-checkbox',
+        icon: 'bi:layers',
         suggestion: 'Layer 1',
         link: '/list?search=layer%201'
       },
       {
-        icon: 'mdi:lastpass',
+        icon: 'bi:layers',
         suggestion: 'Layer 2',
         link: '/list?search=layer%202'
       }

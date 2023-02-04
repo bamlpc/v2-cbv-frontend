@@ -1,4 +1,4 @@
-//
+// ** React Imports
 import { useEffect, useState } from 'react'
 
 // ** MUI Imports
@@ -74,6 +74,7 @@ const Home = () => {
       setDataBigChart(_data.data.find_for_home_page)
     }
     dataFetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // ranking

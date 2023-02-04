@@ -1,10 +1,10 @@
 // ** React Imports
 import React, { useState, useEffect } from 'react'
 
-//
+// ** Next Import
 import { useRouter } from 'next/router'
 
-//
+// ** MUI Imports
 import Card from '@mui/material/Card'
 import { DataGrid } from '@mui/x-data-grid'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -12,8 +12,10 @@ import Box from '@mui/material/Box'
 
 //
 import SearchHeader from 'src/views/pages/list/SearchHeader'
-import { PropsCBV } from 'src/context/types'
 import columns from './Columns'
+
+//** Types
+import { PropsCBV } from 'src/context/types'
 
 /* const escapeRegExp = (value: string) => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')

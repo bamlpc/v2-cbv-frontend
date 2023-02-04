@@ -8,6 +8,7 @@ import InformationOverview from 'src/views/pages/issue/InformationOverview'
 //** Types
 import { PropsCBV } from 'src/context/types'
 
+//** Markdown to react
 import ReactMarkdown from 'react-markdown'
 
 //TODO: CENTER TEXT

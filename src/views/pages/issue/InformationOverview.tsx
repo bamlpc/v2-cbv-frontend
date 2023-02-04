@@ -4,6 +4,8 @@ import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+
+//** Types
 import { PropsCBV } from 'src/context/types'
 
 const renderList = (arr: Array<string[]>) => {

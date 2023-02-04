@@ -1,3 +1,4 @@
+//** Types
 import { PropsCBV } from 'src/context/types'
 
 export const rows: Array<PropsCBV> = [
