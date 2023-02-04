@@ -13,7 +13,7 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-function getLastSixMonth() {
+/* function getLastSixMonth() {
   const monthNames = [
     'January',
     'February',
@@ -36,7 +36,7 @@ function getLastSixMonth() {
   }
 
   return month
-}
+} */
 
 interface HistoricalData {
   average_severity: string
@@ -115,7 +115,7 @@ const LastSixMonthIssues = ({ data }: { data: HistoricalData[] }) => {
       }
     },
     xaxis: {
-      categories: getLastSixMonth(),
+      categories: ['180 days', '150 days', '120 days', '90 days', '60 days', '30 days'],
       tickPlacement: 'on',
       labels: { show: false },
       axisTicks: { show: false },
