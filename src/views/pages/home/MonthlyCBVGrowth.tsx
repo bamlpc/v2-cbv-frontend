@@ -4,7 +4,6 @@ import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import { Skeleton } from '@mui/material'
 
 // ** Third Party Imports
 import { ApexOptions } from 'apexcharts'
