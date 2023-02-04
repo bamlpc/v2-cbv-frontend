@@ -48,13 +48,13 @@ const LastSixMonthIssues = ({ data }: { data: HistoricalData[] }) => {
   const serieDataIssue = data.map((item: HistoricalData) => Number(item.number_of_issues))
   const series = [
     {
-      name: 'Average severity score',
+      name: 'Issues',
       type: 'column',
       data: serieDataIssue
     },
     {
       type: 'line',
-      name: 'Issues',
+      name: 'Average severity score',
       data: serieDataScore
     }
   ]
