@@ -66,7 +66,10 @@
     "react-popper": "2.3.0",
     "react-redux": "8.0.4",
     "react-share": "^4.4.1",
+    "react-syntax-highlighter": "^15.5.0",
     "recharts": "2.1.16",
+    "remark-gfm": "^3.0.1",
+    "remark-github": "^11.2.4",
     "stylis": "4.1.3",
     "stylis-plugin-rtl": "2.1.1",
     "yup": "0.32.11"

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 // ** MUI Components
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -10,6 +11,7 @@ import { PropsCBV } from 'src/context/types'
 
 //** Markdown to react
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 //TODO: CENTER TEXT
 const MainTab = ({ data }: { data: PropsCBV }) => {
@@ -26,7 +28,7 @@ const MainTab = ({ data }: { data: PropsCBV }) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <ReactMarkdown>{data.cbv.details}</ReactMarkdown>
+            <ReactMarkdown children={data.cbv.details} remarkPlugins={[[remarkGfm, { singleTilde: true }]]} />
           </Grid>
           <Grid item xs={12}>
             <Typography variant='h5' sx={{ mb: -2, ml: 20, fontSize: '1.375rem' }}>
@@ -34,7 +36,7 @@ const MainTab = ({ data }: { data: PropsCBV }) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <ReactMarkdown>{data.cbv.recommendation}</ReactMarkdown>
+            <ReactMarkdown children={data.cbv.recommendation} remarkPlugins={[[remarkGfm, { singleTilde: false }]]} />
           </Grid>
         </Grid>
       </Grid>
