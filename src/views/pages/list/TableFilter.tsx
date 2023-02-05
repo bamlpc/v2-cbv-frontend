@@ -1,35 +1,32 @@
 // ** React Imports
-import React, { useState, useEffect } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
-import { DataGrid } from '@mui/x-data-grid'
+import { DataGrid /* GridColumnVisibilityModel */ } from '@mui/x-data-grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import Box from '@mui/material/Box'
 
 //
 import SearchHeader from 'src/views/pages/list/SearchHeader'
 import columns from './Columns'
+import CustomToolbar from './GridToolbar'
 
 //** Types
 import { PropsCBV } from 'src/context/types'
-
-/* const escapeRegExp = (value: string) => {
-  return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-} */
 
 const TableColumns = () => {
   const router = useRouter()
 
   // ** States
   const [pageSize, setPageSize] = useState<number>(7)
-
-  /* const [searchText, setSearchText] = useState<string>('cbv') */
-  /* const [filteredData, setFilteredData] = useState<PropsCBV[]>([]) */
   const [apiData, setApiData] = useState<PropsCBV[]>([])
+
+  const [searchText, setSearchText] = useState<string>('')
+  const [filteredData, setFilteredData] = useState<PropsCBV[]>([])
 
   const search = window.location.search
   const [currentSearch, setCurrentSearch] = useState(search)
@@ -61,6 +58,7 @@ const TableColumns = () => {
                  severity
                  score
                  recommendation
+                 tests
                  created_at
                  updated_at
                  credits
@@ -74,10 +72,12 @@ const TableColumns = () => {
     }
     dataFetch()
   }, [currentSearch])
-  console.log(currentSearch)
 
-  /* const handleSearch = (searchValue: string) => {
+  const handleFilter = (searchValue: string) => {
     setSearchText(searchValue)
+    const escapeRegExp = (value: string) => {
+      return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+    }
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
     const filteredRows = apiData.filter((row: PropsCBV) => {
       return Object.keys(row).some(field => {
@@ -90,9 +90,7 @@ const TableColumns = () => {
     } else {
       setFilteredData([])
     }
-  } */
-
-  // TODO: work on filter and sort
+  }
 
   return (
     <>
@@ -104,9 +102,17 @@ const TableColumns = () => {
             columns={columns()}
             pageSize={pageSize}
             rowsPerPageOptions={[7, 10, 25, 50]}
-            rows={/* filteredData.length ? filteredData :  */ apiData}
+            components={{ Toolbar: CustomToolbar }}
+            rows={filteredData.length ? filteredData : apiData}
             getRowId={apiData => apiData._id}
             onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+            componentsProps={{
+              toolbar: {
+                value: searchText,
+                clearSearch: () => handleFilter(''),
+                onChange: (event: ChangeEvent<HTMLInputElement>) => handleFilter(event.target.value)
+              }
+            }}
           ></DataGrid>
         ) : (
           <Box sx={{ width: '100%' }}>
@@ -119,3 +125,8 @@ const TableColumns = () => {
 }
 
 export default TableColumns
+
+/*
+<input aria-invalid="false" id=":r8n:" placeholder="Filter value"
+type="text" class="MuiInputBase-input MuiInput-input css-32jlfu-MuiInputBase-input-MuiInput-input" value="">
+*/

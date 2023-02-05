@@ -51,7 +51,7 @@ function shareOnSocial(input: string) {
   }
 }
 
-// TODO: finish social media button
+// TODO: finish social media button positioning
 function ShareButton() {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
