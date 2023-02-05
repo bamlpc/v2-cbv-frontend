@@ -14,12 +14,42 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import { SyntheticEvent } from 'react-draft-wysiwyg'
 
 const actions = [
-  { icon: <LinkedInIcon />, name: 'LinkedIn' },
-  { icon: <WhatsAppIcon />, name: 'WhatsApp' },
-  { icon: <TwitterIcon />, name: 'Twitter' },
-  { icon: <FacebookIcon />, name: 'Facebook' },
-  { icon: <EmailIcon />, name: 'Email' }
+  { icon: <LinkedInIcon />, name: 'LinkedIn', run: () => shareOnSocial('LinkedIn') },
+  { icon: <WhatsAppIcon />, name: 'WhatsApp', run: () => shareOnSocial('WhatsApp') },
+  { icon: <TwitterIcon />, name: 'Twitter', run: () => shareOnSocial('Twitter') },
+  { icon: <FacebookIcon />, name: 'Facebook', run: () => shareOnSocial('Facebook') },
+  { icon: <EmailIcon />, name: 'Email', run: () => shareOnSocial('Email') }
 ]
+
+function shareOnSocial(input: string) {
+  const ahref = window.location.href
+  const encodedAhref = encodeURIComponent(ahref)
+  let link = ''
+  switch (input) {
+    case 'LinkedIn': //
+      link = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedAhref}`
+      open(link)
+      break
+
+    case 'WhatsApp': //
+      link = `https://wa.me/?text=Check%20this%20vulnerability%20${encodedAhref}`
+      open(link)
+      break
+
+    case 'Twitter':
+      link = `https://twitter.com/intent/tweet?text=Check%20this%20vulnerability%20&url=${encodedAhref}&hashtags=Blockchain%2CSecurity`
+      open(link)
+      break
+    case 'Facebook':
+      link = `https://www.facebook.com/sharer/sharer.php?u=${encodedAhref}`
+      open(link)
+      break
+    default:
+      link = `mailto:email.com?subject=Blockchain%20vulnerability&body=Check%20this%20vulnerability%20${encodedAhref}`
+      open(link)
+      break
+  }
+}
 
 // TODO: finish social media button
 function ShareButton() {
@@ -33,7 +63,7 @@ function ShareButton() {
   return (
     <SpeedDial
       direction='down'
-      ariaLabel='SpeedDial controlled open example'
+      ariaLabel='Share SpeedDial'
       sx={{ position: 'absolute', trop: 16, right: 16 }}
       icon={<ShareIcon />}
       onClose={handleClose}
@@ -41,7 +71,7 @@ function ShareButton() {
       open={open}
     >
       {actions.map(action => (
-        <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} onClick={handleClose} />
+        <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} onClick={action.run} />
       ))}
     </SpeedDial>
   )
