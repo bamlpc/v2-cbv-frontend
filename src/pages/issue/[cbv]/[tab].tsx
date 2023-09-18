@@ -14,7 +14,7 @@ export default function TabPage() {
   //console.log(cbv, tab)
 
   const [data, setData] = useState(Object)
-  const [cbvCode, setCbvCode] = useState<string>('CBV-23-00002')
+  const [cbvCode, setCbvCode] = useState<string>('CBV-23-00008')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [validCbvCode, setValidCbvCode] = useState<boolean>(true)
 
